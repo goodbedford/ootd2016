@@ -5,10 +5,13 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 
-app.get("/", function(req, res) {
-    res.send("ootd redesign");
-});
+app.use(express.static("public"));
+app.use(express.static("views"));
 
+
+app.get("/", function(req, res) {
+    res.send("#ootd redesign");
+});
 
 
 
