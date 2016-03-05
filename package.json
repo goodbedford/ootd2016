@@ -1,0 +1,30 @@
+{
+  "name": "ootd2016",
+  "version": "1.0.0",
+  "description": "outfit of the day 2016",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "ootd",
+    "goodbedford",
+    "fashion"
+  ],
+  "author": "goodbedford",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-sass": "^2.2.0",
+    "gulp-uglify": "^1.5.3",
+    "jshint": "^2.9.1"
+  }
+}
