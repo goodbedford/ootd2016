@@ -1,0 +1,9 @@
+
+//ignore webstorm
+.idea
+
+// ignore env folders/files
+.env
+
+//apple
+.DS_STORE
