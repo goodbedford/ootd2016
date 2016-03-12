@@ -1,0 +1,15 @@
+doctype html
+html(lang="en" ng-app="app" ng-strict-di)
+    include head/head.jade
+
+    body(ng-cloak)
+        .container
+            h1 #OOTD
+        // nav bar
+        div(ui-view="nav")
+        // main view
+        div(ui-view="content")
+        // logo footer
+        div(ui-view="footer")
+        // script(src="dist/js/package.min.js")
+

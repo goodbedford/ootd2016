@@ -1,0 +1,31 @@
+{
+  "name": "ootd2016",
+  "description": "outfit of the day 2016",
+  "main": "server.js",
+  "authors": [
+    "goodbedford"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "ootd",
+    "goodbedford",
+    "fashion"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "public/lib/"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "jquery": "^2.2.1",
+    "angular-ui-router": "ui-router#^0.2.18",
+    "angular-resource": "^1.5.0",
+    "toastr": "^2.1.2"
+  }
+}
