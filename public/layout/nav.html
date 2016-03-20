@@ -1,4 +1,14 @@
-<h1>I am Nav</h1>
-<a ng-href="#" ui-sref="main.discover">Discover</a>
-<a ng-href="#" ui-sref="main.my-outfits">My Outfits</a>
-<a ng-href="#" ui-sref="main.trending">Trending</a>
+<div class="row">
+    <div class="col-xs-12">
+        <!--<div>I am Nav</div>-->
+        <div class="nav">
+            <a ng-href="#" ui-sref="main.discover">Discover</a>
+            <a ng-href="#" ui-sref="main.my-outfits">My Outfits</a>
+            <a ng-href="#" ui-sref="main.trending">Trending</a>
+            <a ng-href="#" ui-sref="main.login" class="pull-right">Login</a>
+            <!--<a ng-href="#" ng-click="nav.toggleLoggedIn()" class="pull-right">Login</a>-->
+        </div>
+    </div>
+</div>
+<!--login -->
+<div ui-view="login"></div>

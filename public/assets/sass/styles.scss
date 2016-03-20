@@ -1,6 +1,51 @@
-$primary: rgb(120,120,120);
-$secondary: yellow;
+$first-color: rgb(242,56,90);
+$second-color: rgb(245,165,3);
+$third-color: rgb(54,177,191);
+$accent-color-1: rgb(10,10,10);
+$accent-color-2: rgb(219,219,219);
+$accent-color-3: rgb(255,255,255);
 
-h1 {
-  background-color: $secondary;
+//bootstrap override
+.well {
+  //background-color: $third-color;
 }
+
+// nav bar
+div.nav {
+  color: $first-color;
+  background-color: $accent-color-2;
+  padding: 1em 0.5em;
+  a {
+    color: $first-color;
+    text-decoration: none;
+    display: inline-block;
+    height: 100%;
+  }
+
+}
+
+// page wrapper
+.page-wrapper {
+  padding: 0.5em;
+}
+
+// login /sign up form
+.btn-submit {
+  width: 100%;
+  height: 34px;
+}
+
+.input-group.input-wrapper {
+  margin: auto 0 1em 0;
+}
+.login-icon.input-group-addon {
+  color: $accent-color-3;
+  background-color: $third-color;
+}
+.panel-info>.panel-heading {
+  color: $accent-color-3;
+  background-color: $third-color;
+}
+
+
+//footer

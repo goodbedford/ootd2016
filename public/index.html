@@ -15,27 +15,40 @@
     </head>
     <body ng-cloak>
 
-    <div class="container">
-        <h1>#OOTD 2016</h1>
+    <div class="container-fluid">
+        <div>#OOTD 2016</div>
         <!-- nav bar-->
         <div ui-view="nav"></div>
+    </div>
+
+
+
+    <div class="container-fluid">
         <!-- main view-->
-        <div ui-view="main"></div>
+        <div ui-view="main" class="page-wrapper"></div>
         <!-- logo footer-->
-        <div ui-view="footer"></div>
+        <div ui-view="footer" class="page-wrapper"></div>
     </div>
 
 
 
         <!-- script(src="dist/js/package.min.js")-->
-        <script src="lib/jquery/dist/jquery.js"></script>
-        <script src="lib/angular/angular.js"></script>
-        <script src="lib/angular-resource/angular-resource.js"></script>
-        <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="lib/jquery/dist/jquery.min.js"></script>
+        <script src="lib/angular/angular.min.js"></script>
+        <script src="lib/angular-resource/angular-resource.min.js"></script>
+        <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 
         <!-- angular app -->
         <script src="app.module.js"></script>
         <script src="app.config.js"></script>
+        <script src="components/discover/discoverService.js"></script>
+        <script src="components/auth/loginController.js"></script>
+        <script src="components/auth/registerController.js"></script>
+        <script src="components/trending/peopleController.js"></script>
+        <script src="components/auth/authService.js"></script>
+        <script src="components/auth/authInterceptor.js"></script>
+
+        <script src="../../layout/navController.js"></script>
 
     </body>
 </html>
