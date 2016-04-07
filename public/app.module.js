@@ -8,8 +8,13 @@
 
             //angular dependencies
             "ngResource",
+            "ngMessages",
+            "ngAnimate",
+            "ngSanitize",
 
             //third party
-            "ui.router"
+            "toastr",
+            "ui.router",
+            "satellizer"
         ]);
 })();

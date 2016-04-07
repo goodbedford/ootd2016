@@ -1,0 +1,31 @@
+<!-- discover-panel -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="discover-panel">
+      <!-- header -->
+      <div class="discover-panel-header">
+        <div class="discover-panel-img">
+          <img ng-src="{{dp.discoverItem.imgUrl}}" alt="outfit-img" class="img-responsive">
+        </div>
+        <div class="discover-panel-text2">by&nbsp;
+          <span class="discover-panel-text2">{{dp.discoverItem.author}}</span>
+        </div>
+      </div>
+      <!-- footer -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="discover-panel-footer">
+            <div class="discover-panel-btn-panel" ng-show="dp.isAuthenticated()">
+              <button type="button" class="discover-btn btn-all border-rt discover-btn-not-fav" ng-class="{'discover-btn-is-fav': dp.isFavAll}" data-type="all" ng-click="dp.saveOutfit(dp.addType(dp.discoverItem, 'all')); " is-fav-outfit><span class="">All</span></button>
+              <button type="button" class="discover-btn btn-tops border-rt discover-btn-not-fav" ng-class="{'discover-btn-is-fav': dp.isFavTops}" data-type="tops" ng-click="dp.saveOutfit(dp.addType(dp.discoverItem, 'tops')); dp.isClicked(dp.isFavTops); dp.isFavTopsClicked()"><span class="">Tops</span></button>
+              <button type="button" class="discover-btn btn-legs border-rt discover-btn-not-fav" ng-class="{'discover-btn-is-fav': dp.isFavLegs}" data-type="legs" ng-click="dp.saveOutfit(dp.addType(dp.discoverItem, 'legs')); dp.isFavLegsClicked()"><span class="">Legs</span></button>
+              <button type="button" class="discover-btn btn-shoes border-rt discover-btn-not-fav" ng-class="{'discover-btn-is-fav': dp.isFavShoes}" data-type="shoes" ng-click="dp.saveOutfit(dp.addType(dp.discoverItem, 'shoes')); dp.isFavShoesClicked()"><span class="">Shoes</span></button>
+              <button type="button" class="discover-btn btn-pieces border-none discover-btn-not-fav" ng-class="{'discover-btn-is-fav': dp.isFavPieces}" data-type="pieces" ng-click="dp.saveOutfit(dp.addType(dp.discoverItem, 'pieces')); dp.isFavPiecesClicked()"><span class="">Pieces</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end discover-panel -->

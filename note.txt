@@ -1,0 +1,69 @@
+
+
+post to heroku - ootd-app.her
+see other users
+follow a user
+unfollow a user
+write one test for each controller
+write one test for each service
+maybe change the functionality of the button to only show after clicked once, how to unsave from same page
+  look up the image url in the images and delete
+
+fix profile page
+  profile page needs stats
+  username, member, # of outfits, all, tops,legs,shoes,piecs,
+  list users following
+  list of followers
+
+add navigation drop down for small screen instead of the wrap around
+
+fix broken links
+
+
+
+trendCtrl: function ($http, $scope, $state) {
+                                return $http.get("/api/v1/trending")
+                                    .then(function(response) {
+                                        $scope.trending.trends = response.data;
+                                        console.log("the response",response);
+                                    })
+                                    .catch(function (response) {
+                                        $state.go("main.discover");
+                                        console.log("error", response);
+
+                                    });
+                                }
+
+
+
+<!-- discover-panel -->
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="discover-panel">
+                  <!-- header -->
+                  <div class="discover-panel-header">
+                      <div class="discover-panel-img">
+                          <img ng-src="{{discoverItem.imgUrl}}" alt="outfit-img" class="img-responsive">
+                      </div>
+                      <div class="discover-panel-text2">by&nbsp;
+                          <span class="discover-panel-text2">{{discoverItem.author}}</span>
+                      </div>
+                  </div>
+                  <!-- footer -->
+                  <div class="row">
+                      <div class="col-xs-12">
+                          <div class="discover-panel-footer">
+                              <div class="discover-panel-btn-panel">
+                                  <button type="button" class="discover-btn btn-all border-rt" data-type="all" ng-click="discover.saveOutfit(discover.addType(discoverItem, 'all'))"><span class="">All</span></button>
+                                  <button type="button" class="discover-btn btn-tops border-rt" data-type="tops" ng-click="discover.saveOutfit(discover.addType(discoverItem, 'tops'))"><span class="">Tops</span></button>
+                                  <button type="button" class="discover-btn btn-legs border-rt" data-type="legs" ng-click="discover.saveOutfit(discover.addType(discoverItem, 'legs'))"><span class="">Legs</span></button>
+                                  <button type="button" class="discover-btn btn-shoes border-rt" data-type="shoes" ng-click="discover.saveOutfit(discover.addType(discoverItem, 'shoes'))"><span class="">Shoes</span></button>
+                                  <button type="button" class="discover-btn btn-pieces border-none" data-type="pieces" ng-click="discover.saveOutfit(discover.addType(discoverItem, 'pieces'))"><span class="">Pieces</span></button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <!-- end discover-panel -->

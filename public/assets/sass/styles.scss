@@ -5,26 +5,106 @@ $accent-color-1: rgb(10,10,10);
 $accent-color-2: rgb(219,219,219);
 $accent-color-3: rgb(255,255,255);
 
-//bootstrap override
-.well {
-  //background-color: $third-color;
+//outfit btn -----------------------------
+$outfit-panel-btn-delete-bg: rgba(54,177,191, 0.5);
+
+
+// angular cloak
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }
+//colors
+.first-color {
+  color: $first-color;
+}
+.first-color-bg {
+  color: $accent-color-3;
+  background-color: $first-color;
+}
+
+//bootstrap override
+
 
 // nav bar
+.active {
+  color: $accent-color-3!important;
+  background-color: $second-color;
+  border:1px solid $second-color!important;
+}
+
 div.nav {
+  position: fixed;
+  display:block;
+  z-index:20;
+  width: 100%;
+  //height: 3em;
   color: $first-color;
-  background-color: $accent-color-2;
-  padding: 1em 0.5em;
-  a {
+  //background-color: $accent-color-2;
+  background-color: $accent-color-3;
+  box-shadow: 0px 4px 6px 1px rgba(50, 50, 50, 0.4);
+  padding: 0em 1em;
+  a.nav-btn {
+    //height: 100%;
     color: $first-color;
-    text-decoration: none;
     display: inline-block;
-    height: 100%;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    border:1px solid $accent-color-3;
+    &:hover {
+      //color: $accent-color-3;
+      border-bottom:1px solid $second-color;
+    }
+    &:active {
+      color: $accent-color-3;
+      background-color: $second-color;
+      border:1px solid $second-color;
+
+    }
   }
+}
+.nametag {
+  margin-right:10px;
+}
+
+
+// page styles ---------------------
+.footer-fix {
+  min-height: 450px;
+}
+.btn-seeMore {
+  color: $accent-color-3;
+  background-color: $third-color;
+  border: none;
+  border: 1px solid $third-color;
+  outline: none;
+  &:hover {
+    background-color: $accent-color-2;
+  }
+}
+.page-footer-panel {
+  min-height: 5em;
+  color: $accent-color-3;
+  background-color: $accent-color-2;
+  //text-align: center;
+  padding: 2em;
+  margin-top: 3em;
+  //border-top:5px solid $second-color;
 
 }
 
-// page wrapper
+.page-header-fix {
+  padding-top: 3.5em;
+}
+.page-header-panel {
+  text-align: center;
+  margin-bottom: 3.5em;
+}
+.page-sub-title {
+  color: $second-color;
+}
+.page-title {
+  color: $first-color;
+}
 .page-wrapper {
   padding: 0.5em;
 }
@@ -47,5 +127,129 @@ div.nav {
   background-color: $third-color;
 }
 
+.panel-anchors {
+  .panel-btn-anchor {
+    position: fixed;
+    right: 3em;
+    top: 44em;
+    z-index: 10;
+    padding: 5px 5px 5px 4px;
+    color:$first-color;
+    background-color: rgba(0,0,0,0);
+    border: 1px solid $first-color;
+  }
+}
+
+// discover-panel
+.discover-btn {
+  width: 19%;
+  //margin: 0 5%;
+  //color: $third-color;
+  //background-color: $accent-color-3;
+  outline-color: $accent-color-3;
+  &:hover {
+    color: $accent-color-3;
+    background-color: $third-color;
+    border: 1px solid $third-color;
+  }
+  &:active {
+    background-color: $accent-color-2;
+  }
+}
+.discover-btn-not-fav {
+  color: $third-color;
+  background-color: $accent-color-3;
+  border:1px solid $third-color;
+}
+.discover-btn-is-fav {
+  color: $accent-color-3;
+  background-color: $third-color;
+  border:1px solid $accent-color-3;
+}
+
+.discover-panel {
+  //background-color: $accent-color-1;
+  margin-bottom: 2.5em;
+  border-top:5px solid $second-color;
+  &:hover {
+    border-top:5px solid $first-color;
+
+  }
+
+}
+.discover-panel-text1 {
+  color: $first-color;
+}
+.discover-panel-text2 {
+  color: $accent-color-2;
+}
+
+//outfit-panel
+.outfit-panel-btn-delete {
+  position: relative;
+  bottom: -13.4em;
+  z-index:10;
+  font-size: 1.5em;
+  //background-color: $third-color;
+  color: $accent-color-2;
+  background-color: $outfit-panel-btn-delete-bg;
+  padding: 0em 0.5em;
+  border: none;
+  border: 1px solid $outfit-panel-btn-delete-bg;
+  outline: 0;
+  &:hover {
+    color: $first-color;
+    border: 1px solid $first-color;
+  }
+  &:active {
+    color: $accent-color-2;
+    background-color: $first-color;
+    border: 1px solid $first-color;
+  }
+
+}
+.outfit-panel-footer {
+  //background-color:$accent-color-1;
+  //border:1px solid $accent-color-1;
+}
+.outfit-panel-img {
+
+}
+.outfit-img{
+  border-top: 5px solid $second-color;
+  &:hover {
+    border-top: 5px solid $first-color;
+  }
+
+}
+
+.outfit-panel {
+  //background-color: $accent-color-1;
+  margin-bottom: 2.5em;
+  //border-top:2px solid $second-color;
+
+}
+.outfit-panel-section {
+  display: inline-block;
+  font-size: 1.5em;
+  color: $third-color;
+  background-color: $accent-color-3;
+  padding: 0em 1em;
+  //margin-bottom: 1em;
+  border: 2px solid $third-color;
+
+}
+.outfit-panel-text1 {
+  color: $first-color;
+}
+.outfit-panel-text2 {
+  color: $accent-color-2;
+}
+
+// toastr overides
+.toast-success-ootd {
+  margin-top: 3em!important;
+  background-color: $second-color;
+}
 
 //footer

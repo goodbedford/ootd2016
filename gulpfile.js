@@ -4,6 +4,7 @@ var gulp = require("gulp");
 
 // plugins
 var nodemon     = require("gulp-nodemon");
+var Server      = require("karma").Server;
 var jshint      = require("gulp-jshint");
 var jscs        = require("gulp-jscs");
 var jscsStylish = require("gulp-jscs-stylish");
@@ -19,6 +20,17 @@ var jsFiles = [
                 "public/layout/*.js",
                 "server/**/*.js"
               ];
+
+/**
+ * Run test once and exit
+ */
+gulp.task("test", function (done) {
+    new Server({
+        configFile: __dirname + "/karma.config.js",
+        singleRun: true
+
+    }, done).start();
+});
 
 gulp.task("restartServer", function() {
     nodemon({
@@ -46,6 +58,7 @@ gulp.task("sass", function() {
 gulp.task("watch:all", function() {
     gulp.watch("./public/assets/sass/**/*.scss", ["sass"]);
     gulp.watch(jsFiles, ["lint"]);
+    gulp.watch("./test/**/*.js", ["test"]);
 
 });
 
@@ -59,7 +72,7 @@ gulp.task("lint", function() {
         .pipe(jscsStylish());
 });
 
-gulp.task("default",["lint","sass", "watch:all"], function() {
+gulp.task("default",["watch:all"], function() {
 
     var options = {
         script: "server.js",
@@ -68,7 +81,7 @@ gulp.task("default",["lint","sass", "watch:all"], function() {
             PORT: 8000
         },
         ignore: ["./node_modules/**"],
-        watch: jsFiles   //["server.js", "server/**/ *.js"]
+        watch: ["server.js", "server/**/ *.js"]
     };
 
     return nodemon(options)

@@ -3,22 +3,34 @@
     angular
         .module("app")
         .controller("NavController", NavController);
-    NavController.$inject = [];
-    function NavController() {
+    NavController.$inject = ["$auth", "$http", "$q", "$window", "UserService", "toastr"];
+    function NavController($auth, $http, $q, $window, UserService, toastr) {
         var nav = this;
 
         nav.displayLoggedIn = false;
         nav.displaySignUp = false;
+        nav.isAuthenticated = isAuthenticated;
+        nav.toggleLoggedIn = toggleLoggedIn;
+        nav.toggleSignUp = toggleSignUp;
+        nav.currentUsername =  "";
 
-        nav.toggleLoggedIn = function() {
+        function isAuthenticated () {
+            if ($auth.isAuthenticated()) {
+                nav.currentUsername =  $window.localStorage.getItem("currentUsername");
+            }
+            return $auth.isAuthenticated();
+        }
+        function toggleLoggedIn() {
             nav.displayLoggedIn = !nav.displayLoggedIn;
             nav.displaySignUp = false;
             console.log("displayLoggedIn = ", nav.displayLoggedIn);
-        };
-        nav.toggleSignUp = function() {
+        }
+
+        function toggleSignUp() {
             nav.displaySignUp = !nav.displaySignUp;
             nav.displayLoggedIn = false;
             console.log("displaySignUp = ", nav.displaySignUp);
-        };
+        }
+
     }
 })();

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <div class="login-form">
-            <form action="" ng-submit="" name="login.loginForm" class="">
+            <form action="" ng-submit="login.submitLogin()" name="login.loginForm" class="">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <div class="text-center">
@@ -9,18 +9,20 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                        <!--<div class="input-group input-wrapper">-->
+                            <!--<span class="login-icon input-group-addon"><i class="glyphicon glyphicon-user"></i></span>-->
+                            <!--<input type="text" class="form-control" placeholder="Username" ng-model="login.username" ng-required="true"/>-->
+                        <!--</div>-->
                         <div class="input-group input-wrapper">
-                            <!--<label for="">Username:</label>-->
-                            <span class="login-icon input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input type="text" class="form-control" placeholder="Username" ng-model="login.username"/>
+                            <span class="login-icon input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input type="email" class="form-control" placeholder="Email" ng-model="login.email" ng-required="true"/>
                         </div>
                         <div class="input-group input-wrapper">
-                            <!--<label for="">Password</label>-->
                             <span class="login-icon input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-                            <input type="text" class="form-control" placeholder="Password" ng-model="login.password"/>
+                            <input type="password" class="form-control" placeholder="Password" ng-model="login.password" ng-required="true"/>
                         </div>
                         <div class="text-left">Not a member:
-                            <a ng-href="#" ui-sref="main.register"> Sign Up</a>
+                            <a ng-href="#" ui-sref="main.signup"> Sign Up</a>
                         </div>
                         <div class="text-right">
                             <button type="submit">Submit</button>

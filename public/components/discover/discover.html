@@ -1,7 +1,24 @@
-<div class="row">
-    <div class="col-xs-12">
-        <div>
-            <h2>Discover html</h2>
-        </div>
+<div  class="row">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+    <div class="ng-cloak">
+      <div id="top" class="page-header-panel">
+          <h2 class="page-title">Outfit Of The Day</h2>
+          <h4 class="page-sub-title" ng-hide="discover.isAuthenticated()">Login to save your favorite looks.</h4>
+      </div>
+      <div ng-repeat="discoverItem in discover.discoveries track by $index">
+        <ootd-discover-panel item="discoverItem"></ootd-discover-panel>
+      </div>
     </div>
+    <div class="text-center">
+      <button class="btn-seeMore" ng-click="discover.seeMoreQuery()">See More</button>
+    </div>
+  </div>
+    <!--<div class="panel-anchors">-->
+        <!--<div><a ng-href="/#/discover#top" class="panel-btn-anchor glyphicon glyphicon-arrow-up">up</a></div>-->
+    <!--</div>-->
 </div>
+<!--Icon made by [author link] from www.flaticon.com -->
+
+<!--fix scroll anchor to to use scroll top and screenview to move to the top
+    the way it is now with the anchor only works one time cause the url stays the same
+-->

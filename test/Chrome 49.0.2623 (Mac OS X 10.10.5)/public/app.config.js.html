@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for public/app.config.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">public/</a> app.config.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.94% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>13/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.94% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>13/31</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// app.config
+&nbsp;
+(function() {
+    "use strict";
+&nbsp;
+    angular
+        .module("app")
+        .config(config);
+&nbsp;
+    config.$inject = ["$locationProvider", "$stateProvider", "$urlRouterProvider", "$authProvider"];
+&nbsp;
+    function config($locationProvider, $stateProvider, $urlRouterProvider, $authProvider) {
+        $stateProvider
+            .state("main", {
+                url: "",
+                abstract:true,
+                views: {
+                    "main": {
+                        templateUrl: "../../layout/layout.html"
+                    },
+                    "nav": {
+                        controller: "NavController",
+                        controllerAs: "nav",
+                        templateUrl: "../../layout/nav.html"
+                    },
+                    "footer": {
+                        templateUrl: "../../layout/footer.html"
+                    },
+                    //"login@main": {
+                    //    templateUrl: "../../components/auth/login.html",
+                    //    controller: "AuthController",
+                    //    controllerAs: "login"
+                    //}
+                }
+            })
+            .state("main.login", {
+                url:"/login",
+                views: {
+                    "content": {
+                        templateUrl: "../../components/auth/login.html",
+                        controller: "LoginController",
+                        controllerAs: "login",
+                        resolve: {
+                            skipIfLoggedIn: skipIfLoggedIn
+                        }
+                    }
+                }
+            })
+            .state("main.signup", {
+                url: "/signup",
+                views: {
+                    "content": {
+                        templateUrl: "../../components/auth/signup.html",
+                        controller: "SignupController",
+                        controllerAs: "signup",
+                        resolve: {
+                            skipIfLoggedIn: skipIfLoggedIn
+                        }
+                    }
+                }
+            })
+            .state("main.logout", {
+                url: "/logout",
+                views: {
+                    "content": {
+                        template: null,
+                        // templateUrl: "../../components/auth/logout.html",
+                        controller: "LogoutController",
+                        controllerAs: "logout",
+                    }
+                }
+            })
+            .state("main.discover", {
+                url: "/discover",
+                views: {
+                    "content": {
+                        templateUrl: "../../components/discover/discover.html",
+                        controller: "DiscoverController",
+                        controllerAs: "discover"
+                    }
+                }
+            })
+            .state("main.my-outfits", {
+                url: "/my-outfits",
+                views: {
+                    "content": {
+                        templateUrl: "../../components/my_outfits/myOutfits.html",
+                        controller: "MyOutfitsController",
+                        controllerAs: "myOutfits"
+                    }
+                }
+            })
+            .state("main.trending", {
+                url: "/trending",
+                views: {
+                    "content": {
+                        templateUrl: "../../components/trending/trending.html",
+                        controller: "TrendingController",
+                        controllerAs: "trending",
+                        resolve: {
+                            loginRequired: loginRequired,
+                            tester: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >                                return "bobob";</span>
+                            },
+                            trends: trends
+                        }
+                    }
+                }
+            })
+            .state("main.profile", {
+                url: "/profile",
+                views: {
+                    "content": {
+                        templateUrl: "../../components/profile/profile.html"
+                    }
+                }
+            });
+&nbsp;
+        $urlRouterProvider.when("/logout", "/discover");
+        $urlRouterProvider.otherwise("/discover");
+        $authProvider.signupUrl = "/api/v1/signup";
+        $authProvider.loginUrl = "/api/v1/login";
+&nbsp;
+        $locationProvider.html5Mode({
+            enabled: false,
+            requireBase: false
+        });
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function trends($http, $state, toastr) {</span>
+<span class="cstat-no" title="statement not covered" >            return $http.get("/api/v1/trending")</span>
+                .then(<span class="fstat-no" title="function not covered" >function (response) {</span>
+                    // toastr.success("Check out the latest trends.");
+<span class="cstat-no" title="statement not covered" >                    console.log("the response", response);</span>
+<span class="cstat-no" title="statement not covered" >                    return response.data;</span>
+                })
+                .catch(<span class="fstat-no" title="function not covered" >function (response) {</span>
+<span class="cstat-no" title="statement not covered" >                    console.log("error", response);</span>
+<span class="cstat-no" title="statement not covered" >                    toastr.error(response.data.message);</span>
+<span class="cstat-no" title="statement not covered" >                    $state.go("main.discover");</span>
+&nbsp;
+                });
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function skipIfLoggedIn($q, $auth) {</span>
+<span class="cstat-no" title="statement not covered" >            var deferred = $q.defer();</span>
+<span class="cstat-no" title="statement not covered" >            if ($auth.isAuthenticated()) {</span>
+<span class="cstat-no" title="statement not covered" >                console.log("Already logged in.");</span>
+<span class="cstat-no" title="statement not covered" >                deferred.reject();</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                deferred.resolve();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function loginRequired($q, $auth, $state) {</span>
+<span class="cstat-no" title="statement not covered" >            var deferred = $q.defer();</span>
+<span class="cstat-no" title="statement not covered" >            if ($auth.isAuthenticated()) {</span>
+<span class="cstat-no" title="statement not covered" >                deferred.resolve();</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                $state.go("main.login");</span>
+                // $location.path('/login');
+            }
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        }
+    }
+&nbsp;
+})();</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Apr 07 2016 10:46:42 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

@@ -10,10 +10,12 @@ var bodyParser  = require("body-parser");
 var morgan      = require("morgan");
 var request     = require("request");
 var mongoose    = require("mongoose");
+var moment      = require("moment");
 var _           = require("lodash");
-var jwt         = require("jsonwebtoken");
+var jwt         = require("jwt-simple");
 var Tag         = require("./server/models/tag.js");
 var User        = require("./server/models/user.js");
+var Outfit     = require("./server/models/outfit.js");
 
 // ================================
 // load .env file =====================
@@ -36,7 +38,7 @@ mongoose.connect(
 // ================================
 // middleware =====================
 // ================================
-app.set("superSecret", process.env.Super_Secret);
+app.set("tokenSecret", process.env.TOKEN_SECRET);
 
 // use body parser for to get info from post ========
 app.use(bodyParser.urlencoded({extended: true}));
@@ -44,11 +46,11 @@ app.use(bodyParser.json());
 
 // use morgan to log request to console =========
 app.use(morgan("dev"));
-// allow Cross Origin Request
+// pieces Cross Origin Request
 app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type, Authorization");
     next();
 });
 // setup static files root dir ================
@@ -60,105 +62,123 @@ app.use(express.static("public"));
 // ================================
 var apiRoutes = express.Router();
 
+// ==============================
+// create jwt token and return it
+// ==============================
+function createJwt(user) {
+    var payload = {
+        sub: user._id,
+        iat: moment().unix(),
+        exp: moment().add(24, "hours").unix()
+    };
 
+    return jwt.encode(payload, app.get("tokenSecret"));
+}
 
+// middleware that checks if request has token in header ======
 function ensureAuthorization(req, res, next) {
 
-    var token = req.body.token || req.query.token || req.headers["x-access-token"];
-
-    // decode token
-    if (token) {
-        // verify secret and checks expiration
-        jwt.verify(token, app.get("superSecret"), function (err, decoded) {
-            if (err) {
-                return res.json({
-                    success: false,
-                    message: "Failed to authenticate token."
-                });
-            } else {
-                // save decoded to req
-                req.decoded = decoded;
-                next();
-            }
-        });
-    } else {
-        // if no token return error
-        return res.status(403).send({
-            success: false,
-            message: "No token provided."
-        });
+    // var token = req.body.token || req.query.token || req.headers["x-access-token"];
+    if (!req.header("Authorization")) {
+        return res.status(401).send({message: "Please make sure you have a request has Authorization header"});
     }
-};
+
+    var token = req.header("Authorization").split(" ")[1];
+    var payload;
+
+    payload = jwt.decode(token, app.get("tokenSecret"));
+
+
+    if (payload.exp <= moment().unix()) {
+        return res.status(401).send({message: "Token has expired."});
+    }
+
+    req.user = payload.sub;
+    next();
+}
 
 // authenticate ================
-
 apiRoutes.post("/signup", function(req, res) {
-   var user = new User({
-       username: req.body.username,
-       password: req.body.password
-   });
-
-    user.save(function(err, savedUser) {
-            if (err) {throw err;}
-            // create token
-            var token = jwt.sign(user, app.get("superSecret"), {
-                expiresIn: 86400 // 24hrs in seconds
+    User.findOne({email: req.body.email})
+        .exec(function (err, existingUser) {
+            if (existingUser)  {
+                // 409 Conflict Error
+                return res.status(409).send({message: "Email or Password is taken."});
+            }
+            var user = new User({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password
             });
 
-            return res.json({
-                success: true,
-                message: "Token sent.",
-                token: token,
-                user: savedUser
+            user.save({username:1},function (err, savedUser) {
+                if (err) {
+                    // 500 Internal Server Error
+                    console.log(err.message);
+                    return res.status(500).send({message:"Email or Password is taken."});
+                }
+
+                res.send({
+                    token: createJwt(savedUser),
+                    user:savedUser.cleanUserResponse()
+                });
             });
+
         });
-
-
 });
 
 apiRoutes.post("/login", function(req, res) {
 
-    User.findOne({username: req.body.username})
+    User.findOne({email: req.body.email})
+        .select("+password")
         .exec(function(err, user) {
             console.log("user:", user);
-            if (err) {throw err;}
-
             if (!user) {
-                res.json({
-                    success: false,
-                    message: "Authentication failed. User not found."
-                });
-            } else if (user) {
-                // check if password matches  =========
-                //if (user.password !== req.body.password) {
-                if (!user.comparePassword(req.body.password)) {
-                    return res.json({
-                        success: false,
-                        message: "Authentication failed. Wrong password."
-                    });
-                } else {
-                    // if user is found and password is correct
-                    var token = jwt.sign(user, app.get("superSecret"), {
-                        expiresIn: 86400 // 24hrs in seconds
-                    });
-
-                    // return the information including token as json
-                    return res.json({
-                        success: true,
-                        message: "Token sent.",
-                        token: token,
-                        user: user
-                    });
-
-                }
+                // 404 Not Found
+                return res.status(404).send({message: "Invalid Email or Password."});
             }
+            user.comparePassword(req.body.password, function(err, isMatch) {
+                if (!isMatch) {
+                    console.log("ismath", isMatch);
+                    return res.status(401).send({message: "Invalid Email or Password."});
+                }
+                res.send({
+                    token: createJwt(user),
+                    user: user.cleanUserResponse()
+                });
+            });
         });
 });
 
+
+// currentuser =====================
+apiRoutes.get("/me", ensureAuthorization, function (req, res) {
+    User.findById(req.user)
+       .exec(function(err, foundUser) {
+           if (err) {throw err;}
+           console.log("foundUser", foundUser);
+           res.status(200).send(foundUser);
+       });
+});
+
+apiRoutes.get("/trending", ensureAuthorization, function (req, res) {
+    console.log("the user is req.user", req.user);
+    res.json({trends:["some","trendys"]});
+});
 // Discover ========================
 apiRoutes.get("/discover", function(req, res) {
+    console.log("discover was hit");
+    request.get("https://api.instagram.com/v1/tags/ootd/media/recent?client_id=" + process.env.clientId, function(err,respond, body) {
+        // console.log("the discover body", body);
+        var pictures = JSON.parse(body);
+        //console.log("pictures", pictures.data)
+        if (err) {
+            console.log("Error retrieving pictures.", err);
+            return res.status(500).send({message:"Error retrieving pictures."});
+        }
+        res.send(pictures.data);
 
-    res.send("ha ha discovery");
+    });
 });
 
 //apiRoutes.post("/sign-up", function(req, res) {
@@ -186,57 +206,122 @@ apiRoutes.get("/setup", function(req, res) {
 });
 
 
-// middleware to verify token
-//apiRoutes.use(function(req, res, next) {
-//
-//    var token = req.body.token || req.query.token || req.headers["x-access-token"];
-//
-//    // decode token
-//    if (token) {
-//        // verify secret and checks expiration
-//        jwt.verify(token, app.get("superSecret"), function(err,decoded) {
-//            if (err) {
-//                return res.json({
-//                    success: false,
-//                    message: "Failed to authenticate token."
-//                });
-//            } else {
-//                // save decoded to req
-//                req.decoded = decoded;
-//                next();
-//            }
-//        });
-//    } else {
-//        // if no token return error
-//        return res.status(403).send({
-//            success: false,
-//            message: "No token provided."
-//        });
-//    }
-//});
-
-
-
 // Users ========================
-
-
 apiRoutes.get("/users", ensureAuthorization, function(req, res) {
-
     User.find({})
         .exec(function(err, users) {
             console.log("found users",users);
             res.json(users);
         });
 });
+// Outfits ========================
 
-app.get("/api/v1/users/:id", function(req, res) {
+apiRoutes.get("/users/outfits", ensureAuthorization, function(req, res) {
+    User.findById(req.user)
+        .populate("outfits")
+        .exec(function(err, foundUser) {
+            // console.log(err.message);
+            if (err) {
+                console.log("Error Message:", err.message);
+                return res.status(500).send({message:"Error finding user."});
+            }
+            console.log("foundUser", foundUser.username);
 
+            res.status(200).send(foundUser);
+
+
+            //send save outfit send type in query params,
+            // check if there or send nothing
+            // save outfit to db
+            // push the savedOutfit to user.
+            // return confirmation.
+
+
+        });
 
 });
 
-// Outfits ========================
-app.get("/api/v1/users/:id/outfits", function(req, res) {
+apiRoutes.post("/users/outfits", ensureAuthorization, function(req, res) {
+    // /api/v1/users/:id/outfits?pieces=1&tops=2
+	console.log("req.body post", req.body);
+    var outfit =  new Outfit({
+        imgUrl: req.body.imgUrl,
+        author: req.body.author,
+        type:  req.body.type
+    });
 
+		outfit.save(function(err,savedOutfit) {
+			if (err) {
+				console.log("Error saving outfit to db:", err);
+				res.status(500).send({message: "Error saving outfit."})
+			}
+			console.log("Successful outfit saved", savedOutfit);
+			User.findById(req.user)
+				.exec(function (err, user) {
+					if (err) {
+						console.log("Error Message:", err.message);
+						return res.status(500).send({message:"Error finding user."});
+					}
+					user.outfits.unshift(savedOutfit._id);
+
+					user.save(function (err, savedUser) {
+						if (err) {
+							console.log("Error Message:", err.message);
+							return res.status(500).send({message:"Error saving user."});
+						}
+						console.log("Successful outfit update");
+						res.status(201).send(savedOutfit);
+					});
+				});
+
+		});
+});
+apiRoutes.delete("/users/outfits/:outfitId", ensureAuthorization, function(req, res) {
+	// /api/v1/users/:id/outfits?pieces=1&tops=2
+	// console.log("req.body delete", req.params	);
+	var outfitId =  req.params.outfitId;
+	User.findById(req.user)
+		.exec(function (err, foundUser) {
+			if (err) {
+				console.log("Error Message:", err.message);
+				return res.status(500).send({message:"Error finding user."});
+			}
+			var index = foundUser.outfits.indexOf(outfitId);
+
+			if (index >= 0) {
+				foundUser.outfits.splice(index,1);
+			} else {
+				console.log("Outfit was not in outfits to delete");
+				return res.status(500).send({message:"Error outfit not in user outfits."});
+			}
+
+			foundUser.save(function (err, savedUser) {
+					if (err) {
+						console.log("Error Message:", err.message);
+						return res.status(500).send({message:"Error saving user."});
+					}
+					Outfit.findByIdAndRemove(outfitId)
+						.exec(function (err, foundOutfit) {
+							if (err) {
+								console.log("Error Message:", err.message);
+								return res.status(500).send({message:"Error finding outfit."});
+							}
+							console.log("Successful delete of outfit:", foundOutfit);
+
+							// res.status(200).send(savedUser);
+							User.findById(savedUser._id)
+								.populate("outfits")
+								.exec(function (err, foundUser)  {
+									if (err) {
+										console.log("Error Message:", err.message);
+										return res.status(500).send({message:"Error finding user."});
+									}
+									res.status(200).send(savedUser);
+
+								});
+						});
+				});
+		});
 
 });
 

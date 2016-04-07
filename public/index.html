@@ -6,49 +6,58 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
         <title>#OOTD</title>
-        <link rel="shortcut icon" ng-href="src/assets/images/favicon.png">
+        <link rel="shortcut icon" ng-href="/assets/images/favicon.png">
         <link rel="stylesheet" ng-href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" ng-href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" ng-href="lib/angular-toastr/dist/angular-toastr.css"/>
         <link rel="stylesheet" ng-href="assets/css/styles.css"/>
         <!--<link rel="stylesheet" ng-href="dist/css/styles.min.css">-->
         <!-- to remove # from url set a base()-->
     </head>
     <body ng-cloak>
 
-    <div class="container-fluid">
-        <div>#OOTD 2016</div>
-        <!-- nav bar-->
-        <div ui-view="nav"></div>
-    </div>
+        <div class="container-fluid">
+            <!--<div>#OOTD 2016</div>-->
+            <!-- nav bar-->
+            <div ui-view="nav"></div>
+        </div>
 
-
-
-    <div class="container-fluid">
-        <!-- main view-->
-        <div ui-view="main" class="page-wrapper"></div>
-        <!-- logo footer-->
-        <div ui-view="footer" class="page-wrapper"></div>
-    </div>
-
-
+        <div class="container-fluid">
+            <!-- main view-->
+            <div ui-view="main" class="page-wrapper footer-fix"></div>
+            <!-- logo footer-->
+            <div ui-view="footer" class="page-wrapper"></div>
+        </div>
 
         <!-- script(src="dist/js/package.min.js")-->
         <script src="lib/jquery/dist/jquery.min.js"></script>
         <script src="lib/angular/angular.min.js"></script>
         <script src="lib/angular-resource/angular-resource.min.js"></script>
         <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="lib/angular-messages/angular-messages.min.js"></script>
+        <script src="lib/angular-animate/angular-animate.min.js"></script>
+        <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="lib/angular-toastr/dist/angular-toastr.tpls.js"></script>
+        <script src="lib/satellizer/satellizer.js"></script>
+
 
         <!-- angular app -->
         <script src="app.module.js"></script>
         <script src="app.config.js"></script>
+        <script src="components/discover/discoverController.js"></script>
         <script src="components/discover/discoverService.js"></script>
-        <script src="components/auth/loginController.js"></script>
-        <script src="components/auth/registerController.js"></script>
-        <script src="components/trending/peopleController.js"></script>
-        <script src="components/auth/authService.js"></script>
-        <script src="components/auth/authInterceptor.js"></script>
-
         <script src="../../layout/navController.js"></script>
+        <script src="components/auth/loginController.js"></script>
+        <script src="components/auth/signupController.js"></script>
+        <script src="components/auth/logoutController.js"></script>
+        <script src="components/auth/authService.js"></script>
+        <script src="components/trending/trendingController.js"></script>
+        <script src="shared/userService.js"></script>
+        <script src="components/my_outfits/myOutfitsController.js"></script>
+        <script src="components/my_outfits/myOutfitsService.js"></script>
+        <script src="components/discover/discoverDirective.js"></script>
+        <script src="components/discover/discoverPanelController.js"></script>
+        <script src="shared/isFavOutfitDirective.js"></script>
 
     </body>
 </html>

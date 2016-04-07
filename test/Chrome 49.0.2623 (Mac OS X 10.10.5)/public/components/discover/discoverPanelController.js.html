@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for public/components/discover/discoverPanelController.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">public/components/discover/</a> discoverPanelController.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.57% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>14/49</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">7.14% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.57% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>14/49</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () {
+	"use strict";
+&nbsp;
+	angular
+		.module("app")
+		.controller("DiscoverPanelController", DiscoverPanelController);
+&nbsp;
+	DiscoverPanelController.$inject = [ "$auth", "MyOutfitsService"];
+&nbsp;
+<span class="fstat-no" title="function not covered" >	function DiscoverPanelController( $auth, MyOutfitsService) {</span>
+<span class="cstat-no" title="statement not covered" >		var dp = this;</span>
+<span class="cstat-no" title="statement not covered" >		dp.saveOutfit = saveOutfit;</span>
+<span class="cstat-no" title="statement not covered" >		dp.addType = addType;</span>
+<span class="cstat-no" title="statement not covered" >		dp.getItem = getItem;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isFavAllClicked = isFavAllClicked;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isFavTopsClicked = isFavTopsClicked;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isFavLegsClicked = isFavLegsClicked;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isFavShoesClicked = isFavShoesClicked;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isFavPiecesClicked = isFavPiecesClicked;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isAuthenticated = $auth.isAuthenticated;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		dp.isFavAll = false;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isFavTop = false;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isFavLegs = false;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isFavShoes = false;</span>
+<span class="cstat-no" title="statement not covered" >		dp.isFavPieces = false;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function getItem(item) {</span>
+<span class="cstat-no" title="statement not covered" >			console.log("get item,", item);</span>
+<span class="cstat-no" title="statement not covered" >			var newItem = angluar.copy(item);</span>
+<span class="cstat-no" title="statement not covered" >			return newItem;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function isFavAllClicked () {</span>
+<span class="cstat-no" title="statement not covered" >			console.log("iam isClicked", dp.isFavAll);</span>
+<span class="cstat-no" title="statement not covered" >			dp.isFavAll = !dp.isFavAll;</span>
+		}
+<span class="fstat-no" title="function not covered" >		function isFavTopsClicked () {</span>
+<span class="cstat-no" title="statement not covered" >			console.log("iam isClicked", dp.isFavTops);</span>
+<span class="cstat-no" title="statement not covered" >			dp.isFavTops = !dp.isFavTops;</span>
+		}
+<span class="fstat-no" title="function not covered" >		function isFavLegsClicked () {</span>
+<span class="cstat-no" title="statement not covered" >			console.log("iam isClicked", dp.isFavLegs);</span>
+<span class="cstat-no" title="statement not covered" >			dp.isFavLegs = !dp.isFavLegs;</span>
+		}
+<span class="fstat-no" title="function not covered" >		function isFavShoesClicked () {</span>
+<span class="cstat-no" title="statement not covered" >			console.log("iam isClicked", dp.isFavShoes);</span>
+<span class="cstat-no" title="statement not covered" >			dp.isFavShoes = !dp.isFavShoes;</span>
+		}
+<span class="fstat-no" title="function not covered" >		function isFavPiecesClicked () {</span>
+<span class="cstat-no" title="statement not covered" >			console.log("iam isClicked", dp.isFavPieces);</span>
+<span class="cstat-no" title="statement not covered" >			dp.isFavPieces = !dp.isFavPieces;</span>
+		}
+<span class="fstat-no" title="function not covered" >		function saveOutfit( outfity) {</span>
+			// get the data-type property
+<span class="cstat-no" title="statement not covered" >			console.log("pressed saveOutfit");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			console.log("this discover.author",outfity.	author );</span>
+<span class="cstat-no" title="statement not covered" >			console.log("discover.outfit -",outfity);</span>
+<span class="cstat-no" title="statement not covered" >			var outfit =  {</span>
+				imgUrl: outfity.imgUrl,
+				author: outfity.author,
+				type: outfity.type
+			};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			MyOutfitsService.save(outfit)</span>
+				.then(<span class="fstat-no" title="function not covered" >function(response) {</span>
+&nbsp;
+				})
+				.catch(<span class="fstat-no" title="function not covered" >function(error) {</span>
+&nbsp;
+				});
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function saveOutfitSuccess() {</span>
+&nbsp;
+		}
+<span class="fstat-no" title="function not covered" >		function saveOutfitFail() {</span>
+		}
+<span class="fstat-no" title="function not covered" >		function addType( outfity, type) {</span>
+<span class="cstat-no" title="statement not covered" >			outfity.type = type;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			return outfity;</span>
+		}
+&nbsp;
+&nbsp;
+&nbsp;
+	}
+})();</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Apr 07 2016 10:46:42 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

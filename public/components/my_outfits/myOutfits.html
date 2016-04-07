@@ -1,5 +1,154 @@
-<div class="row">
+<div class="row" ng-cloak ng-show="myOutfits.outfits">
     <div class="col-xs-12">
-        <h2>My Outfits View</h2>
+      <h2 id="top" class="text-center first-color">My Outfits</h2>
+      <div class="row">
+        <div class="col-xs-12"><span class="outfit-panel-section">All</span></div>
+        <div ng-repeat="outfit in myOutfits.outfits | filter: {'type': 'all'} track by $index" class="col-xs-6 col-sm-3">
+          <!-- outfit-panel -->
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="outfit-panel">
+                <!-- header -->
+                <div class="outfit-panel-header">
+                  <div class="outfit-panel-img">
+                    <button class="outfit-panel-btn-delete" ng-click="myOutfits.deleteOutfit(outfit._id)">x</button>
+                    <img ng-src="{{outfit.imgUrl}}" alt="outfit-img" class="img-responsive outfit-img">
+                  </div>
+                </div>
+                <div class="outfit-panel-footer">
+                  <div class="outfit-panel-text2">
+                    by&nbsp;
+                    <span class="outfit-panel-text2">{{outfit.author}}</span>
+                  </div>
+                </div>
+                <!-- end looks-template -->
+              </div>
+            </div>
+          </div>
+          <!-- end outfit-panel -->
+        </div>
+        <!--end all row-->
+      </div>
+      <div class="row">
+        <div class="col-xs-12"><span class="outfit-panel-section">Tops</span></div>
+        <div ng-repeat="outfit in myOutfits.outfits | filter: {'type': 'tops'} track by $index" class="col-xs-6 col-sm-3">
+          <!-- outfit-panel -->
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="outfit-panel">
+                <!-- header -->
+                <div class="outfit-panel-header">
+                  <div class="outfit-panel-img">
+                    <button class="outfit-panel-btn-delete" ng-click="myOutfits.deleteOutfit(outfit._id)">x</button>
+                    <img ng-src="{{outfit.imgUrl}}" alt="outfit-img" class="img-responsive outfit-img">
+                  </div>
+                </div>
+                <div class="outfit-panel-footer">
+                  <div class="outfit-panel-text2">by&nbsp;
+                    <span class="outfit-panel-text2">{{outfit.author}}</span>
+                    <br>
+                    <span>{{outfit.type}}</span>
+                  </div>
+                </div>
+                <!-- end looks-template -->
+              </div>
+            </div>
+          </div>
+          <!-- end outfit-panel -->
+        </div>
+        <!-- end tops row --->
+      </div>
+      <div class="row">
+        <div class="col-xs-12"><span class="outfit-panel-section">Legs</span></div>
+        <div ng-repeat="outfit in myOutfits.outfits | filter: {'type': 'legs'} track by $index" class="col-xs-6 col-sm-3">
+          <!-- outfit-panel -->
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="outfit-panel">
+                <!-- header -->
+                <div class="outfit-panel-header">
+                  <div class="outfit-panel-img">
+                    <button class="outfit-panel-btn-delete" ng-click="myOutfits.deleteOutfit(outfit._id)">x</button>
+                    <img ng-src="{{outfit.imgUrl}}" alt="outfit-img" class="img-responsive outfit-img">
+                  </div>
+                </div>
+                <div class="outfit-panel-footer">
+                  <div class="outfit-panel-text2">by&nbsp;
+                    <span class="outfit-panel-text2">{{outfit.author}}</span>
+                    <br>
+                    <span>{{outfit.type}}</span>
+                  </div>
+                </div>
+                <!-- end looks-template -->
+              </div>
+            </div>
+          </div>
+          <!-- end outfit-panel -->
+        </div>
+        <!-- end legs row --->
+      </div>
+      <div class="row">
+        <div class="col-xs-12"><span class="outfit-panel-section">Shoes</span></div>
+        <div ng-repeat="outfit in myOutfits.outfits | filter: {'type': 'shoes'} track by $index" class="col-xs-6 col-sm-3">
+          <!-- outfit-panel -->
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="outfit-panel">
+                <!-- header -->
+                <div class="outfit-panel-header">
+                  <div class="outfit-panel-img">
+                    <button class="outfit-panel-btn-delete" ng-click="myOutfits.deleteOutfit(outfit._id)">x</button>
+                    <img ng-src="{{outfit.imgUrl}}" alt="outfit-img" class="img-responsive outfit-img">
+                  </div>
+                </div>
+                <div class="outfit-panel-footer">
+                  <div class="outfit-panel-text2">by&nbsp;
+                    <span class="outfit-panel-text2">{{outfit.author}}</span>
+                    <br>
+                    <span>{{outfit.type}}</span>
+                  </div>
+                </div>
+                <!-- end looks-template -->
+              </div>
+            </div>
+          </div>
+          <!-- end outfit-panel -->
+        </div>
+        <!-- end shoes row --->
+      </div>
+      <div class="row">
+        <div class="col-xs-12"><span class="outfit-panel-section">Pieces</span></div>
+        <div ng-repeat="outfit in myOutfits.outfits | filter: {'type': 'pieces'} track by $index" class="col-xs-6 col-sm-3">
+          <!-- outfit-panel -->
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="outfit-panel">
+                <!-- header -->
+                <div class="outfit-panel-header">
+                  <div class="outfit-panel-img">
+                    <button class="outfit-panel-btn-delete" ng-click="myOutfits.deleteOutfit(outfit._id)">x</button>
+                    <img ng-src="{{outfit.imgUrl}}" alt="outfit-img" class="img-responsive outfit-img">
+                  </div>
+                </div>
+                <div class="outfit-panel-footer">
+                  <div class="outfit-panel-text2">by&nbsp;
+                    <span class="outfit-panel-text2">{{outfit.author}}</span>
+                    <br>
+                    <span>{{outfit.type}}</span>
+                  </div>
+                </div>
+                <!-- end looks-template -->
+              </div>
+            </div>
+          </div>
+          <!-- end outfit-panel -->
+        </div>
+        <!-- end pieces row --->
+      </div>
     </div>
+    <!--<div class="panel-anchors">-->
+      <!--<div><a ng-href="/#/my-outfits#top" class="outfit-panel-btn-anchor">Up</a></div>-->
+    <!--</div>-->
 </div>
+
+
