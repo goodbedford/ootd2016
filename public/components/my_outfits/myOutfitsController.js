@@ -13,13 +13,16 @@
 		myOutfits.getOutfits = getOutfits;
 		myOutfits.deleteOutfit = deleteOutfit;
 		myOutfits.outfits;
-
+		myOutfits.showError = showError;
+		myOutfits.test = "godobed";
 		activate();
 
 		function activate() {
 			myOutfits.getOutfits();
 		}
-
+		function showError() {
+			console.log("some major error");
+		}
 		function getOutfits() {
 			MyOutfitsService.query()
 				.then(function(response) {
