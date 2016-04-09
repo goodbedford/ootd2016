@@ -171,6 +171,13 @@ div.nav {
 .outfit-panel-text2 {
   color: #dbdbdb; }
 
+.profile-img {
+  width: 300px;
+  background-color: black; }
+
+div.profile-img > img {
+  border-radius: 50%; }
+
 .toast-success-ootd {
   margin-top: 3em !important;
   background-color: #f5a503; }

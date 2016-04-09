@@ -245,6 +245,14 @@ div.nav {
 .outfit-panel-text2 {
   color: $accent-color-2;
 }
+//profile page
+.profile-img {
+  width:300px;
+  background-color: black;
+}
+div.profile-img>img{
+  border-radius:50%;
+}
 
 // toastr overides
 .toast-success-ootd {

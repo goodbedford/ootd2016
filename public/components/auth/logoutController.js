@@ -20,6 +20,7 @@
                 .then(function() {
                     toastr.ootdSuccess($window.localStorage.getItem("currentUsername") +" is now logged out.");
                     $window.localStorage.removeItem("currentUsername");
+                    $window.localStorage.removeItem(("currentUsernameId"));
                     $state.go("main.discover");
                 })
                 .catch(function () {

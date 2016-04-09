@@ -5,14 +5,14 @@
 		.module("app")
 		.controller("MyOutfitsController", MyOutfitsController);
 
-	MyOutfitsController.$inject = ["$http", "$state", "$auth","$window", "toastr", "UserService", "MyOutfitsService"];
+	MyOutfitsController.$inject = ["$http", "$state", "$auth","$window", "toastr", "UserService", "MyOutfitsService", "allOutfits"];
 
-	function MyOutfitsController($http, $state, $auth, $window, toastr, UserService, MyOutfitsService) {
+	function MyOutfitsController($http, $state, $auth, $window, toastr, UserService, MyOutfitsService, allOutfits) {
 		var myOutfits = this;
 
 		myOutfits.getOutfits = getOutfits;
 		myOutfits.deleteOutfit = deleteOutfit;
-		myOutfits.outfits;
+		// myOutfits.outfits = allOutfits;
 		myOutfits.showError = showError;
 		myOutfits.test = "godobed";
 		activate();

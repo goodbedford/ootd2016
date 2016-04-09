@@ -111,7 +111,7 @@ apiRoutes.post("/signup", function(req, res) {
                 password: req.body.password
             });
 
-            user.save({username:1},function (err, savedUser) {
+            user.save(function (err, savedUser) {
                 if (err) {
                     // 500 Internal Server Error
                     console.log(err.message);
@@ -161,9 +161,96 @@ apiRoutes.get("/me", ensureAuthorization, function (req, res) {
        });
 });
 
+// profile ==========================
+apiRoutes.get("/profile", ensureAuthorization, function(req, res) {
+	User.findById(req.user)
+		.populate("outfits")
+		.exec(function (err, foundUser) {
+			var allCount = foundUser.outfits.filter(function(outfit) {
+				return outfit.type === "all"
+			});
+			var topsCount = foundUser.outfits.filter(function(outfit) {
+				return outfit.type === "tops" ;
+			});
+			var legsCount = foundUser.outfits.filter(function(outfit) {
+				return outfit.type === "legs" ;
+			});
+			var shoesCount = foundUser.outfits.filter(function(outfit) {
+				return outfit.type === "shoes" ;
+			});
+			var piecesCount = foundUser.outfits.filter(function(outfit) {
+				return outfit.type === "tops" ;
+			});
+			var totalCount = allCount.length + topsCount.length + legsCount.length + shoesCount.length + piecesCount.length;
+			var createdAt = moment(foundUser.timestamps).format("MM-DD-YYYY");
+
+			if (err) {
+				return res.send({Message: "Error retreiving the trending current user count of types"});
+			}
+			// 			console.log("Sum of User types array", sumOfUserTypes);
+			res.status(200).json({
+				allCount: allCount.length,
+				topsCount: topsCount.length,
+				legsCount: legsCount.length,
+				shoesCount: shoesCount.length,
+				piecesCount: piecesCount.length,
+				totalCount: totalCount,
+				createdAt: createdAt,
+				user:foundUser
+			});
+		})
+})
+
 apiRoutes.get("/trending", ensureAuthorization, function (req, res) {
     console.log("the user is req.user", req.user);
-    res.json({trends:["some","trendys"]});
+
+	User.findById(req.user)
+		.populate("outfits")
+		.exec(function (err, foundUser) {
+			var allCount = foundUser.outfits.filter(function(outfit) {
+				return outfit.type === "all"
+			});
+			var topsCount = foundUser.outfits.filter(function(outfit) {
+				return outfit.type === "tops" ;
+			});
+
+			if (err) {
+								return res.send({Message: "Error retreiving the trending current user count of types"});
+							}
+				// 			console.log("Sum of User types array", sumOfUserTypes);
+							res.status(200).json({allCount: allCount.length, topsCount: topsCount.length});
+	})
+	// Outfit.count({
+	// 	type:"all",
+	// 	},function(err, allCount) {
+	// 	if (err) {
+	// 		return res.send({Message: "Error retreiving the trending all count"});
+	// 	}
+	// 	console.log("allCount", allCount);
+	// 	// res.status(200).json({allCount: allCount});
+	//
+	//
+	//
+	// 	Outfit.aggregate([{
+	// 		$match: {
+	// 			_id: req.user
+	// 		}
+	// 	},
+	// 		{
+	// 			$group: {
+	// 				_id: "$type",
+	// 				// type: "all",
+	// 				count: {$sum: 1}
+	// 			},
+	// 		}], function (err, sumOfUserTypes) {
+	// 			if (err) {
+	// 				return res.send({Message: "Error retreiving the trending current user count of types"});
+	// 			}
+	// 			console.log("Sum of User types array", sumOfUserTypes);
+	// 			res.status(200).json({allCount: allCount, userAllCount: sumOfUserTypes});
+	// 		});
+	// });
+    // res.json({trends:["some","trendys"]});
 });
 // Discover ========================
 apiRoutes.get("/discover", function(req, res) {

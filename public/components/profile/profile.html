@@ -1,3 +1,43 @@
-<h1>profile page</h1>
+<div class="row">
+  <h2 class="text-center first-color">Profile</h2>
 
-{{currentUser}}
+  <div class="col-xs-12 col-sm-6">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="profile-img">
+          <img src="assets/images/logo-user.png" alt="" class="img-responsive">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>{{profile.user.username}}</h3>
+        <h4>Member Since: {{profile.currentProfile.createdAt}}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>{{profile.allCount}}: Outfits All</h4>
+        <h4>{{profile.topsCount}}: Outfits Tops</h4>
+        <h4>{{profile.legsCount}}: Outfits Legs</h4>
+        <h4>{{profile.shoesCount}}: Outfits Shoes</h4>
+        <h4>{{profile.piecesCount}}: Outfits Pieces</h4>
+        <h4>{{profile.totalCount}}: Outfits Total</h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>Following</h4>
+        <div></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>Followers</h4>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
