@@ -12,11 +12,14 @@
 
 		myOutfits.getOutfits = getOutfits;
 		myOutfits.deleteOutfit = deleteOutfit;
-		// myOutfits.outfits = allOutfits;
+		myOutfits.user = allOutfits;
+		myOutfits.outfits = allOutfits.outfits;
 		myOutfits.showError = showError;
 		myOutfits.test = "godobed";
-		activate();
 
+		// activate();
+
+		console.log("Im here outfits", allOutfits);
 		function activate() {
 			myOutfits.getOutfits();
 		}

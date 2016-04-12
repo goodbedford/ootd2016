@@ -41,7 +41,7 @@
 						controller: "LoginController",
 						controllerAs: "login",
 						resolve: {
-							skipIfLoggedIn: skipIfLoggedIn
+							// skipIfLoggedIn: skipIfLoggedIn
 						}
 					}
 				}
@@ -54,7 +54,7 @@
 						controller: "SignupController",
 						controllerAs: "signup",
 						resolve: {
-							skipIfLoggedIn: skipIfLoggedIn
+							// skipIfLoggedIn: skipIfLoggedIn
 						}
 					}
 				}
@@ -71,7 +71,7 @@
 				}
 			})
 			.state("main.discover", {
-				url: "/discover",
+				url: "/",
 				views: {
 					"content": {
 						templateUrl: "../../components/discover/discover.html",
@@ -88,11 +88,11 @@
 						controller: "MyOutfitsController",
 						controllerAs: "myOutfits",
 						resolve: {
-							loginRequired: loginRequired,
+							// loginRequired: loginRequired,
 							allOutfits: allOutfits
-						}
 					}
 				}
+			}
 			})
 			.state("main.trending", {
 				url: "/trending",
@@ -125,28 +125,41 @@
 					}
 				}
 			});
+			// .state("main.otherwise", {
+			// 	url: "*path",
+			// 	views: {
+			// 		"content": {
+			// 			templateUrl: "../../components/discover/discover.html",
+			// 			controller: "DiscoverController",
+			// 			controllerAs: "discover"
+			// 		}
+			// 	}
+			// });
 
 		$urlRouterProvider.when("/logout", "/discover");
-		$urlRouterProvider.otherwise("/discover");
 		$authProvider.signupUrl = "/api/v1/signup";
 		$authProvider.loginUrl = "/api/v1/login";
-
+		// $authProvider.loginRedirect = "/discover";
 		$locationProvider.html5Mode({
 			enabled: false,
 			requireBase: false
 		});
-		
-		function allOutfits($http,$state,toastr, MyOutfitsService) {
-			return MyOutfitsService.query("/api/v1/users/outfits/")
-				.then(allOutfitsSuccess)
-				.catch(allOutfitsFail);
-			// return $http.get("/api/v1/users/outfits/")
-			// 	.then(allOutfitsSuccess)
-			// 	.catch(allOutfitsFail);
+		// $urlRouterProvider.otherwise("/discover");
+		$urlRouterProvider.otherwise(function($injector, $location){
+			var $state = $injector.get("$state");
+
+			$state.go("main.discover");
+		});
+
+		function allOutfits(MyOutfitsService) {
+			return MyOutfitsService.query("/api/v1/users/outfits/");
+			// $http.get("/api/v1/users/outfits/")
+				// .then(allOutfitsSuccess)
+				// .catch(allOutfitsFail);
 		}
 		function allOutfitsSuccess(user) {
-			console.log("all outfits success", user);
-			return user;
+			console.log("all outfits success", user.data);
+			return user.data;
 		}
 		function trends($http, $state, toastr) {
 			return $http.get("/api/v1/trending")

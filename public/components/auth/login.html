@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <div class="login-form">
-            <form action="" ng-submit="login.submitLogin()" name="login.loginForm" class="">
+            <form action="" method="POST" ng-submit="$event.stopPropagation(); login.submitLogin($event);" name="login.loginForm" class="" >
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <div class="text-center">
@@ -25,7 +25,7 @@
                             <a ng-href="#" ui-sref="main.signup"> Sign Up</a>
                         </div>
                         <div class="text-right">
-                            <button type="submit">Submit</button>
+                            <input type="submit" value="Submit">
                         </div>
                     </div>
                 </div>

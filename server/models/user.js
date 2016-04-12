@@ -43,6 +43,7 @@ UserSchema.methods.comparePassword = function(password, done) {
     var user = this;
 
     bcrypt.compare(password, user.password, function(err, isMatch) {
+        console.log("inner bcrypt isMatch:", isMatch);
         done(err, isMatch);
     });
 };
