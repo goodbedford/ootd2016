@@ -12,8 +12,10 @@
         
         signup.submitSignup = submitSignup;
 
-        function submitSignup() {
-            var newUser = {username: signup.username, email: signup.email, password:signup.password};
+        function submitSignup(event) {
+          event.preventDefault();
+
+          var newUser = {username: signup.username, email: signup.email, password:signup.password};
 
             $auth.signup(newUser)
                 .then(function(response) {
