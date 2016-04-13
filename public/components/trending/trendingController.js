@@ -1,31 +1,44 @@
-(function() {
-    "use strict";
+(function () {
+	"use strict";
 
-    angular
-        .module("app")
-        .controller("TrendingController", TrendingController);
+	angular
+		.module("app")
+		.controller("TrendingController", TrendingController);
 
-    TrendingController.$inject = ["$http", "$state", "$auth", "toastr", "tester", "trends"];
+	TrendingController.$inject = ["$http", "$state", "$auth", "toastr", "MyOutfitsService", "trends"];
 
-    function TrendingController($http, $state, $auth, toastr, tester, trends) {
-        var trending = this;
-        trending.tester = tester;
-        trending.trends = trends;
-        // trending.isAuthenticated = $auth.isAuthenticated;
+	function TrendingController($http, $state, $auth, toastr, MyOutfitsService, trends) {
+		var trending = this;
+		trending.trends = trends;
+		trending.deleteOutfit = deleteOutfit;
+		trending.getTrends = getTrends;
 
-        // $http.get("/api/v1/trending")
-        //     .then(function(response) {
-        //         trending.trends = response.data;
-        //         console.log("the response",response);
-        //     })
-        //     .catch(function (response) {
-        //         console.log("error", response);
-        //         toastr.error(response.data.message, {
-        //             closeButton: true
-        //         });
-        //
-        //         // $state.go("main.discover");
-        //
-        //     })
-    }
+		function activate() {
+			getTrends();
+		}
+		function getTrends() {
+			return $http.get("/api/v1/trending")
+				.then(function (trends) {
+					trending.trends = trends.data;
+				})
+				.catch(function(error) {
+					console.log("Error receiving trends.", error);
+					$state.go("main.discover");
+
+				});
+		}
+		function deleteOutfit(outfitId) {
+			console.log("outfit id:", outfitId);
+			MyOutfitsService.removeTrends(outfitId)
+				.then(function (response) {
+					console.log("Successful delete", response);
+					activate();
+					// myOutfits.outfits = myOutfits.user.outfits;
+					// myOutfits.user = response;
+				})
+				.catch(function (error) {
+					console.log("Error deleting outfit.", error);
+				})
+		}
+	}
 })();

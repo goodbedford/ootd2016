@@ -103,9 +103,6 @@
 						controllerAs: "trending",
 						resolve: {
 							loginRequired: loginRequired,
-							tester: function () {
-								return "bobob";
-							},
 							trends: trends
 						}
 					}

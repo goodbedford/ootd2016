@@ -75,11 +75,10 @@ function createJwt(user) {
 
 	return jwt.encode(payload, app.get("tokenSecret"));
 }
-
+// ================================
 // middleware that checks if request has token in header ======
+// ================================
 function ensureAuthorization(req, res, next) {
-
-	// var token = req.body.token || req.query.token || req.headers["x-access-token"];
 	if (!req.header("Authorization")) {
 		return res.status(401).send({message: "Please make sure you have a request has Authorization header"});
 	}
@@ -97,8 +96,9 @@ function ensureAuthorization(req, res, next) {
 	req.user = payload.sub;
 	next();
 }
-
+// ================================
 // authenticate ================
+// ================================
 apiRoutes.post("/signup", function (req, res) {
 	User.findOne({email: req.body.email})
 		.exec(function (err, existingUser) {
@@ -127,7 +127,9 @@ apiRoutes.post("/signup", function (req, res) {
 
 		});
 });
-
+// ================================
+// Login POST ================================
+// ================================
 apiRoutes.post("/login", function (req, res) {
 
 	User.findOne({email: req.body.email})
@@ -153,8 +155,9 @@ apiRoutes.post("/login", function (req, res) {
 		});
 });
 
-
+// ================================
 // currentuser =====================
+// ================================
 apiRoutes.get("/me", ensureAuthorization, function (req, res) {
 	User.findById(req.user)
 		.exec(function (err, foundUser) {
@@ -165,8 +168,9 @@ apiRoutes.get("/me", ensureAuthorization, function (req, res) {
 			res.status(200).send(foundUser);
 		});
 });
-
+// ================================
 // profile ==========================
+// ================================
 apiRoutes.get("/profile", ensureAuthorization, function (req, res) {
 	User.findById(req.user)
 		.populate("outfits")
@@ -204,27 +208,99 @@ apiRoutes.get("/profile", ensureAuthorization, function (req, res) {
 				user: foundUser
 			});
 		})
-})
-
+});
+// ================================
+// trending ================================
+// ================================
 apiRoutes.get("/trending", ensureAuthorization, function (req, res) {
 	console.log("the user is req.user", req.user);
-
-	User.findById(req.user)
-		.populate("outfits")
-		.exec(function (err, foundUser) {
-			var allCount = foundUser.outfits.filter(function (outfit) {
-				return outfit.type === "all"
-			});
-			var topsCount = foundUser.outfits.filter(function (outfit) {
-				return outfit.type === "tops";
-			});
-
+	var trends = {};
+	Outfit.find({})
+		// - for newest first
+		.sort("-timestamps")
+		.limit(10)
+		.exec(function (err, trendingLatest) {
 			if (err) {
-				return res.send({Message: "Error retreiving the trending current user count of types"});
+				console.log("Trending Error:", err);
+				return res.send({Message: "Error retrieving the trending current user count of types"});
 			}
-			// 			console.log("Sum of User types array", sumOfUserTypes);
-			res.status(200).json({allCount: allCount.length, topsCount: topsCount.length});
-		})
+			// console.log("trending", trendingLatest);
+			trends.trendingLatest = trendingLatest;
+			Outfit.find({})
+				.where({type: "all"})
+				.sort("-timestamps")
+				.limit(10)
+				.exec(function (err, allLatest) {
+					if (err) {
+						console.log("Trending Error:", err);
+						return res.send({Message: "Error retrieving the trending current user count of types"});
+					}
+					trends.allLatest = allLatest;
+					Outfit.find({})
+						.where({type: "tops"})
+						.sort("-timestamps")
+						.limit(10)
+						.exec(function (err, topsLatest) {
+							if (err) {
+								console.log("Trending Error:", err);
+								return res.send({Message: "Error retrieving the trending current user count of types"});
+							}
+							trends.topsLatest = topsLatest;
+							Outfit.find({})
+								.where({type: "legs"})
+								.sort("-timestamps")
+								.limit(10)
+								.exec(function (err, legsLatest) {
+									if (err) {
+										console.log("Trending Error:", err);
+										return res.send({Message: "Error retrieving the trending current user count of types"});
+									}
+									trends.legsLatest = legsLatest;
+									Outfit.find({})
+										.where({type: "shoes"})
+										.sort("-timestamps")
+										.limit(10)
+										.exec(function (err, shoesLatest) {
+											if (err) {
+												console.log("Trending Error:", err);
+												return res.send({Message: "Error retrieving the trending current user count of types"});
+											}
+											trends.shoesLatest = shoesLatest;
+											Outfit.find({})
+												.where({type: "pieces"})
+												.sort("-timestamps")
+												.limit(10)
+												.exec(function (err, piecesLatest) {
+													if (err) {
+														console.log("Trending Error:", err);
+														return res.send({Message: "Error retrieving the trending current user count of types"});
+													}
+													trends.piecesLatest = piecesLatest;
+
+													res.send(trends);
+												});
+										});
+								});
+						});
+				});
+			// res.send(trendingLatest)
+		});
+	// User.findById(req.user)
+	// 	.populate("outfits")
+	// 	.exec(function (err, foundUser) {
+	// 		var allCount = foundUser.outfits.filter(function (outfit) {
+	// 			return outfit.type === "all"
+	// 		});
+	// 		var topsCount = foundUser.outfits.filter(function (outfit) {
+	// 			return outfit.type === "tops";
+	// 		});
+	//
+	// 		if (err) {
+	// 			return res.send({Message: "Error retreiving the trending current user count of types"});
+	// 		}
+	// 		// 			console.log("Sum of User types array", sumOfUserTypes);
+	// 		res.status(200).json({allCount: allCount.length, topsCount: topsCount.length});
+	// 	});
 	// Outfit.count({
 	// 	type:"all",
 	// 	},function(err, allCount) {
@@ -257,7 +333,9 @@ apiRoutes.get("/trending", ensureAuthorization, function (req, res) {
 	// });
 	// res.json({trends:["some","trendys"]});
 });
+// ================================
 // Discover ========================
+// ================================
 apiRoutes.get("/discover", function (req, res) {
 	console.log("discover was hit");
 	request.get("https://api.instagram.com/v1/tags/ootd/media/recent?client_id=" + process.env.clientId, function (err, respond, body) {
@@ -299,8 +377,9 @@ apiRoutes.get("/setup", function (req, res) {
 
 });
 
-
+// ================================
 // Users ========================
+// ================================
 apiRoutes.get("/users", ensureAuthorization, function (req, res) {
 	User.find({})
 		.exec(function (err, users) {
@@ -308,8 +387,9 @@ apiRoutes.get("/users", ensureAuthorization, function (req, res) {
 			res.json(users);
 		});
 });
-// Outfits ========================
-
+// ================================
+// Outfits GET ========================
+// ================================
 apiRoutes.get("/users/outfits", ensureAuthorization, function (req, res) {
 	User.findById(req.user)
 		.populate("outfits")
@@ -320,17 +400,12 @@ apiRoutes.get("/users/outfits", ensureAuthorization, function (req, res) {
 				return res.status(500).send({message: "Error finding user."});
 			}
 			console.log("foundUser", foundUser.username);
-
 			res.status(200).send(foundUser);
-
-			//send save outfit send type in query params,
-			// check if there or send nothing
-			// save outfit to db
-			// push the savedOutfit to user.
-			// return confirmation.
 		});
 });
-
+// ================================
+// Outfits POST ================================
+// ================================
 apiRoutes.post("/users/outfits", ensureAuthorization, function (req, res) {
 	// /api/v1/users/:id/outfits?pieces=1&tops=2
 	console.log("req.body post", req.body);
@@ -366,6 +441,9 @@ apiRoutes.post("/users/outfits", ensureAuthorization, function (req, res) {
 
 	});
 });
+// ================================
+// Outfit DELETE ================================
+// ================================
 apiRoutes.delete("/users/outfits/:outfitId", ensureAuthorization, function (req, res) {
 	// /api/v1/users/:id/outfits?pieces=1&tops=2
 	// console.log("req.body delete", req.params	);
@@ -412,10 +490,35 @@ apiRoutes.delete("/users/outfits/:outfitId", ensureAuthorization, function (req,
 					});
 			});
 		});
-
+});
+// ================================
+// Outfit Trends DELETE ================================
+// ================================
+apiRoutes.delete("/trends/outfits/:outfitId", ensureAuthorization, function (req, res) {
+	// /api/v1/users/:id/outfits?pieces=1&tops=2
+	console.log("req.body delete", req.params	);
+	var outfitId = req.params.outfitId;
+	User.findById(req.user)
+		.exec(function (err, foundUser) {
+			if (err) {
+				console.log("Error Message:", err.message);
+				return res.status(500).send({message: "Error finding user."});
+			}
+			Outfit.findByIdAndRemove(outfitId)
+				.exec(function (err, foundOutfit) {
+					if (err) {
+						console.log("Error Message:", err.message);
+						return res.status(500).send({message: "Error finding outfit."});
+					}
+					console.log("Successful delete of outfit:", foundOutfit);
+					res.status(200).send({});
+				});
+		});
 });
 
+// ================================
 // Tags ========================
+// ================================
 app.get("/api/v1/tags", function (req, res) {
 
 });
@@ -423,15 +526,6 @@ app.get("/api/v1/tags", function (req, res) {
 app.get("/api/v1/tags/:id", function (req, res) {
 
 });
-
-
-//check if mongoose is hooked up correctly
-//var tagOne;
-//
-//Tag.findOne({}).exec(function(err, foundTag) {
-//    tagOne = foundTag;
-//    console.log("the first tag",tagOne);
-//});
 
 app.use("/api/v1", apiRoutes);
 

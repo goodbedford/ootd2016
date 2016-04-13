@@ -48,7 +48,7 @@ div.nav {
     color: $first-color;
     display: inline-block;
     text-decoration: none;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.75em;
     border:1px solid $accent-color-3;
     &:hover {
       //color: $accent-color-3;
@@ -111,9 +111,22 @@ div.nav {
 
 // login /sign up form
 .btn-submit {
-  width: 100%;
-  height: 34px;
+  //width: 100%;
+  //height: 34px;
+  color: $accent-color-3;
+  background-color: $third-color;
+  padding: 0.5em 0.75em;
+  border:1px solid $accent-color-3;
+  &:hover {
+    color: $first-color;
+    background-color: $accent-color-2;
+  }
+  &:active {
+    color: $first-color;
+    background-color: darken($accent-color-2, 20%);
+  }
 }
+
 
 .input-group.input-wrapper {
   margin: auto 0 1em 0;
@@ -187,7 +200,7 @@ div.nav {
 //outfit-panel
 .outfit-panel-btn-delete {
   position: relative;
-  bottom: -13.4em;
+  bottom: 32px;
   z-index:10;
   font-size: 1.5em;
   //background-color: $third-color;
@@ -209,6 +222,7 @@ div.nav {
 
 }
 .outfit-panel-footer {
+  margin-top: -1em;
   //background-color:$accent-color-1;
   //border:1px solid $accent-color-1;
 }
@@ -235,7 +249,7 @@ div.nav {
   color: $third-color;
   background-color: $accent-color-3;
   padding: 0em 1em;
-  //margin-bottom: 1em;
+  margin-bottom: 1em;
   border: 2px solid $third-color;
 
 }

@@ -13,7 +13,8 @@
 			query:query,
 			get:get,
 			save: save,
-			remove: remove
+			remove: remove,
+			removeTrends: removeTrends
 		};
 		var url = "/api/v1/users/outfits/";
 		var currentUserId = $window.localStorage.getItem("currentUsernameId");
@@ -49,6 +50,17 @@
 				})
 				.catch(function (error) {
 					return console.log("Error Deleting outfit from db:", error);
+				})
+		}
+		function removeTrends(outfitId) {
+			var url ="/api/v1/trends/outfits/"
+			return $http.delete(url + outfitId)
+				.then(function (user) {
+					console.log("Successful Delete.", user.data);
+					return user.data;
+				})
+				.catch(function (error) {
+					return console.log("Error Deleting Trends outfit from db:", error);
 				})
 		}
 

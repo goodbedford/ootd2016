@@ -13,7 +13,7 @@
         nav.toggleLoggedIn = toggleLoggedIn;
         nav.toggleSignUp = toggleSignUp;
         nav.currentUsername =  "";
-
+        nav.displayMenu = false;
         function isAuthenticated () {
             if ($auth.isAuthenticated()) {
                 nav.currentUsername =  $window.localStorage.getItem("currentUsername");
