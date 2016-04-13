@@ -31,7 +31,7 @@
 
 				})
 				.catch(function (response) {
-					console.log("submitLogin Fail: error,", response.config);
+					console.log("submitLogin Fail: Error,", response.config);
 					$state.go("main.login");
 					toastr.error(response.data.message);
 				});
