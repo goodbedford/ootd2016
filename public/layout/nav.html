@@ -7,8 +7,8 @@
              <a ng-href="#" ui-sref="main.my-outfits" ng-show="nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">My Outfits</a>
              <a ng-href="#" ui-sref="main.trending" ng-show="nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Trending</a>
             <span class="hidden-xs pull-right nav-auth">
-                <a ng-href="#" ui-sref="main.profile"  ng-show="nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Current User:&nbsp;{{nav.currentUsername}}</a>
-                <a ng-href="#" ui-sref="main.login"  ng-show="!nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Login</a>
+                <a ng-href="#" ui-sref="main.profile"  ng-show="nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Profile:&nbsp;{{nav.currentUsername}}</a>
+                <!--<a ng-href="#" ui-sref="main.login"  ng-show="!nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Login</a>-->
                 <a ng-href="#" ui-sref="main.logout"  ng-show="nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Logout</a>
             </span>
              <a ng-href="#" ui-sref="main.login"  ng-show="!nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Login</a>
@@ -16,7 +16,7 @@
            </div>
           <div ng-show="nav.displayMenu">
              <span class="nav-auth">
-                <a ng-href="#" ui-sref="main.profile"  ng-show="nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Current User:&nbsp;{{nav.currentUsername}}</a>
+                <a ng-href="#" ui-sref="main.profile"  ng-show="nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Profile:&nbsp;{{nav.currentUsername}}</a>
                 <a ng-href="#" ui-sref="main.login"  ng-show="!nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Login</a>
                 <a ng-href="#" ui-sref="main.logout"  ng-show="nav.isAuthenticated()" ui-sref-active-eq="active" class="nav-btn">Logout</a>
             </span>
