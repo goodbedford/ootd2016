@@ -9,6 +9,8 @@ var UserSchema = new Schema({
     admin: Boolean,
     // createdAt: {type: Date, default: Date.now}
     outfits: [{type: Schema.Types.ObjectId, ref: "Outfit"}],
+    followers: [{type:Schema.Types.ObjectId, ref: "User"}],
+		following: [{type:Schema.Types.ObjectId, ref: "User"}],
     timestamps: {type: Date, default: Date.now}
 
 });
