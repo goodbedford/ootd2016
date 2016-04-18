@@ -16,8 +16,9 @@
 			remove: remove,
 			removeTrends: removeTrends
 		};
-		var url = "/api/v1/users/outfits/";
+
 		var currentUserId = $window.localStorage.getItem("currentUsernameId");
+		var url = "/api/v1/users/" + currentUserId + "/outfits/";
 		return factory;
 
 		function query() {
@@ -53,7 +54,7 @@
 				})
 		}
 		function removeTrends(outfitId) {
-			var url ="/api/v1/trends/outfits/"
+			var url ="/api/v1/trends/outfits/";
 			return $http.delete(url + outfitId)
 				.then(function (user) {
 					console.log("Successful Delete.", user.data);

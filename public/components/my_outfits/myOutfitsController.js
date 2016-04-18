@@ -12,8 +12,8 @@
 
 		myOutfits.getOutfits = getOutfits;
 		myOutfits.deleteOutfit = deleteOutfit;
-		myOutfits.user = allOutfits;
-		myOutfits.outfits = allOutfits.outfits;
+		// myOutfits.user = allOutfits;
+		myOutfits.outfits = allOutfits;
 		myOutfits.showError = showError;
 		myOutfits.test = "godobed";
 
@@ -30,8 +30,8 @@
 			MyOutfitsService.query()
 				.then(function(response) {
 					console.log("MyOutfitsService response", response);
-					myOutfits.user = response;
-					myOutfits.outfits = myOutfits.user.outfits;
+					// myOutfits.user = response;
+					myOutfits.outfits = response;
 				})
 				.catch(function(error) {
 					console.log("Error getting outfits", error);
@@ -39,6 +39,7 @@
 		}
 
 		function deleteOutfit(outfitId) {
+			console.log("delete outfit called.");
 			console.log("outfit id:", outfitId);
 			MyOutfitsService.remove(outfitId)
 				.then(function(response) {
@@ -49,23 +50,7 @@
 				})
 				.catch(function (error) {
 					console.log("Error deleting outfit.", error);
-				})
+				});
 		}
-		// myOutfits.isAuthenticated = $auth.isAuthenticated;
-
-		// $http.get("/api/v1/myOutfits")
-		//     .then(function(response) {
-		//         myOutfits.trends = response.data;
-		//         console.log("the response",response);
-		//     })
-		//     .catch(function (response) {
-		//         console.log("error", response);
-		//         toastr.error(response.data.message, {
-		//             closeButton: true
-		//         });
-		//
-		//         // $state.go("main.discover");
-		//
-		//     })
 	}
 })();

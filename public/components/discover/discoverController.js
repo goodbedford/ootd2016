@@ -52,11 +52,8 @@
 				})
 		}
 		function saveOutfit( outfity) {
-			// get the data-type property
-			console.log("pressed saveOutfit");
-
-			console.log("this discover.author",outfity.author );
-			console.log("discover.outfit -",outfity);
+			// console.log("this discover.author",outfity.author );
+			// console.log("discover.outfit -",outfity);
 			var outfit =  {
 				imgUrl: outfity.imgUrl,
 				author: outfity.author,
@@ -65,10 +62,8 @@
 			
 			MyOutfitsService.save(outfit)
 				.then(function(response) {
-
 				})
 				.catch(function(error) {
-
 				});
 		}
 		

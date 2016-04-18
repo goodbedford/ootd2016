@@ -18,7 +18,7 @@ var UserSchema = new Schema({
 // hash password before the user is saved
 UserSchema.pre("save", function(next) {
     var user = this;
-    console.log("this pre save started", user);
+    console.log("this pre save started", user.username);
     if (!user.isModified("password")) {
         console.log("password not modified.");
         return next();

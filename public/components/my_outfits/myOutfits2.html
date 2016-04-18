@@ -1,0 +1,24 @@
+<!-- outfit-panel -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="outfit-panel">
+      <!-- header -->
+      <div class="outfit-panel-header">
+        <div class="outfit-panel-img">
+          <img ng-src="{{outfitPanel.outfit.imgUrl}}" alt="outfit-img" class="img-responsive outfit-img" img-error>
+          <!--<button class="outfit-panel-btn-delete" ng-click="outfitPanel.deleteOutfitItem(outfitPanel.outfit._id)">x</button>-->
+        </div>
+      </div>
+      <!-- end outfit-panel-header -->
+      <div class="outfit-panel-footer">
+        <div class="outfit-panel-text">
+          <!--<p class="outfit-panel-text2 col-xs-9">by&nbsp;{{outfitPanel.outfit.author}}</p>-->
+          <button class="outfit-panel-btn-delete col-xs-1"><i class="fa fa-close"></i></button>
+          <div class="outfit-panel-likes col-xs-4 pull-right"><i class="fa fa-heart"></i>&nbsp;{{outfitPanel.outfit.users.length}}</div>
+        </div>
+      </div>
+      <!-- end outfit-panel-footer -->
+    </div>
+  </div>
+</div>
+<!-- end outfit-panel -->

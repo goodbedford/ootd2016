@@ -58,7 +58,23 @@ div.nav {
       color: $accent-color-3;
       background-color: $second-color;
       border:1px solid $second-color;
-
+    }
+  }
+  a.nav-btn-dropdown {
+    //height: 100%;
+    color: $first-color;
+    display: block;
+    text-decoration: none;
+    padding: 0.5em 0.75em;
+    border:1px solid $accent-color-3;
+    &:hover {
+      //color: $accent-color-3;
+      border-bottom:1px solid $second-color;
+    }
+    &:active {
+      color: $accent-color-3;
+      background-color: $second-color;
+      border:1px solid $second-color;
     }
   }
 }
@@ -186,7 +202,6 @@ div.nav {
   border-top:5px solid $second-color;
   &:hover {
     border-top:5px solid $first-color;
-
   }
 
 }
@@ -199,30 +214,35 @@ div.nav {
 
 //outfit-panel
 .outfit-panel-btn-delete {
-  position: relative;
-  bottom: 32px;
-  z-index:10;
-  font-size: 1.5em;
+  //position: relative;
+  //bottom: 32px;
+  //z-index:10;
+  //font-size: 1.5em;
+  width:1.5em;
   //background-color: $third-color;
   color: $accent-color-2;
-  background-color: $outfit-panel-btn-delete-bg;
-  padding: 0em 0.5em;
+  background-color: white;//$outfit-panel-btn-delete-bg;
+  padding: 0em;
   border: none;
-  border: 1px solid $outfit-panel-btn-delete-bg;
+  cursor: pointer;
+
+  //border: 1px solid $outfit-panel-btn-delete-bg;
   outline: 0;
   &:hover {
     color: $first-color;
-    border: 1px solid $first-color;
+    //border: 1px solid $first-color;
   }
   &:active {
     color: $accent-color-2;
     background-color: $first-color;
-    border: 1px solid $first-color;
+    //border: 1px solid $first-color;
   }
 
 }
 .outfit-panel-footer {
-  margin-top: -1em;
+  margin-top: 0em;
+  margin-bottom: 3em;
+  //padding: 0 0.5em;
   //background-color:$accent-color-1;
   //border:1px solid $accent-color-1;
 }
@@ -235,17 +255,25 @@ div.nav {
 }
 .outfit-img{
   border-top: 5px solid $second-color;
+  cursor: pointer;
   &:hover {
     border-top: 5px solid $first-color;
   }
 
 }
+.outfit-panel-likes {
+  color: $accent-color-2;
+  padding: 0em;
+  text-align: right;
+
+  //border: 1px solid;
+}
 
 .outfit-panel {
   //background-color: $accent-color-1;
+  font-size: 1.5em;
   margin-bottom: 2.5em;
   //border-top:2px solid $second-color;
-
 }
 .outfit-panel-section {
   display: inline-block;
@@ -257,11 +285,18 @@ div.nav {
   border: 2px solid $third-color;
 
 }
+.outfit-panel-text {
+}
 .outfit-panel-text1 {
   color: $first-color;
 }
 .outfit-panel-text2 {
+  display: inline-block;
   color: $accent-color-2;
+  padding: 0px;
+  text-align: left;
+  word-wrap: break-word;
+
 }
 //profile page
 .profile-img {

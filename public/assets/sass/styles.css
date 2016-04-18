@@ -34,6 +34,18 @@ div.nav {
       color: white;
       background-color: #f5a503;
       border: 1px solid #f5a503; }
+  div.nav a.nav-btn-dropdown {
+    color: #f2385a;
+    display: block;
+    text-decoration: none;
+    padding: 0.5em 0.75em;
+    border: 1px solid white; }
+    div.nav a.nav-btn-dropdown:hover {
+      border-bottom: 1px solid #f5a503; }
+    div.nav a.nav-btn-dropdown:active {
+      color: white;
+      background-color: #f5a503;
+      border: 1px solid #f5a503; }
 
 .nametag {
   margin-right: 10px; }
@@ -139,33 +151,36 @@ div.nav {
   color: #dbdbdb; }
 
 .outfit-panel-btn-delete {
-  position: relative;
-  bottom: 32px;
-  z-index: 10;
-  font-size: 1.5em;
+  width: 1.5em;
   color: #dbdbdb;
-  background-color: rgba(54, 177, 191, 0.5);
-  padding: 0em 0.5em;
+  background-color: white;
+  padding: 0em;
   border: none;
-  border: 1px solid rgba(54, 177, 191, 0.5);
+  cursor: pointer;
   outline: 0; }
   .outfit-panel-btn-delete:hover {
-    color: #f2385a;
-    border: 1px solid #f2385a; }
+    color: #f2385a; }
   .outfit-panel-btn-delete:active {
     color: #dbdbdb;
-    background-color: #f2385a;
-    border: 1px solid #f2385a; }
+    background-color: #f2385a; }
 
 .outfit-panel-footer {
-  margin-top: -1em; }
+  margin-top: 0em;
+  margin-bottom: 3em; }
 
 .outfit-img {
-  border-top: 5px solid #f5a503; }
+  border-top: 5px solid #f5a503;
+  cursor: pointer; }
   .outfit-img:hover {
     border-top: 5px solid #f2385a; }
 
+.outfit-panel-likes {
+  color: #dbdbdb;
+  padding: 0em;
+  text-align: right; }
+
 .outfit-panel {
+  font-size: 1.5em;
   margin-bottom: 2.5em; }
 
 .outfit-panel-section {
@@ -181,7 +196,11 @@ div.nav {
   color: #f2385a; }
 
 .outfit-panel-text2 {
-  color: #dbdbdb; }
+  display: inline-block;
+  color: #dbdbdb;
+  padding: 0px;
+  text-align: left;
+  word-wrap: break-word; }
 
 .profile-img {
   width: 300px;

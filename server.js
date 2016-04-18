@@ -1,12 +1,12 @@
 // ================================
 // server.js =====================
 // ================================
-var express = require("express");
-var path = require("path");
-var env = process.env.NODE_ENV = process.env.NODE_ENV || "development";
-var app = express();
-var port = process.env.PORT || 3000;
-var dotenv = require("dotenv");
+var express 	= require("express");
+var path 			= require("path");
+var env 			= process.env.NODE_ENV = process.env.NODE_ENV || "development";
+var app 			= express();
+var port 			= process.env.PORT || 3000;
+var dotenv 		= require("dotenv");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
 var request = require("request");
@@ -17,7 +17,7 @@ var jwt = require("jwt-simple");
 var Tag = require("./server/models/tag.js");
 var User = require("./server/models/user.js");
 var Outfit = require("./server/models/outfit.js");
-
+var outfitHelper = require("./server/helpers/outfitHelper.js");
 // ================================
 // load .env file =====================
 // ================================
@@ -188,13 +188,13 @@ apiRoutes.get("/profile", ensureAuthorization, function (req, res) {
 				return outfit.type === "shoes";
 			});
 			var piecesCount = foundUser.outfits.filter(function (outfit) {
-				return outfit.type === "tops";
+				return outfit.type === "pieces";
 			});
 			var totalCount = allCount.length + topsCount.length + legsCount.length + shoesCount.length + piecesCount.length;
 			var createdAt = moment(foundUser.timestamps).format("MM-DD-YYYY");
 
 			if (err) {
-				return res.send({Message: "Error retreiving the trending current user count of types"});
+				return res.send({Message: "Error retrieving the trending current user count of types"});
 			}
 			// 			console.log("Sum of User types array", sumOfUserTypes);
 			res.status(200).json({
@@ -283,55 +283,7 @@ apiRoutes.get("/trending", ensureAuthorization, function (req, res) {
 								});
 						});
 				});
-			// res.send(trendingLatest)
 		});
-	// User.findById(req.user)
-	// 	.populate("outfits")
-	// 	.exec(function (err, foundUser) {
-	// 		var allCount = foundUser.outfits.filter(function (outfit) {
-	// 			return outfit.type === "all"
-	// 		});
-	// 		var topsCount = foundUser.outfits.filter(function (outfit) {
-	// 			return outfit.type === "tops";
-	// 		});
-	//
-	// 		if (err) {
-	// 			return res.send({Message: "Error retreiving the trending current user count of types"});
-	// 		}
-	// 		// 			console.log("Sum of User types array", sumOfUserTypes);
-	// 		res.status(200).json({allCount: allCount.length, topsCount: topsCount.length});
-	// 	});
-	// Outfit.count({
-	// 	type:"all",
-	// 	},function(err, allCount) {
-	// 	if (err) {
-	// 		return res.send({Message: "Error retreiving the trending all count"});
-	// 	}
-	// 	console.log("allCount", allCount);
-	// 	// res.status(200).json({allCount: allCount});
-	//
-	//
-	//
-	// 	Outfit.aggregate([{
-	// 		$match: {
-	// 			_id: req.user
-	// 		}
-	// 	},
-	// 		{
-	// 			$group: {
-	// 				_id: "$type",
-	// 				// type: "all",
-	// 				count: {$sum: 1}
-	// 			},
-	// 		}], function (err, sumOfUserTypes) {
-	// 			if (err) {
-	// 				return res.send({Message: "Error retreiving the trending current user count of types"});
-	// 			}
-	// 			console.log("Sum of User types array", sumOfUserTypes);
-	// 			res.status(200).json({allCount: allCount, userAllCount: sumOfUserTypes});
-	// 		});
-	// });
-	// res.json({trends:["some","trendys"]});
 });
 // ================================
 // Discover ========================
@@ -351,13 +303,6 @@ apiRoutes.get("/discover", function (req, res) {
 	});
 });
 
-//apiRoutes.post("/sign-up", function(req, res) {
-//    var user = new User({
-//
-//    });
-//    res.json({message:"still working on this"});
-//});
-
 apiRoutes.get("/setup", function (req, res) {
 	// create test user
 	var gb = new User({
@@ -370,11 +315,9 @@ apiRoutes.get("/setup", function (req, res) {
 		if (err) {
 			throw err;
 		}
-
 		console.log("User saved successfully");
 		res.json({success: true});
 	});
-
 });
 
 // ================================
@@ -403,10 +346,26 @@ apiRoutes.get("/users/outfits", ensureAuthorization, function (req, res) {
 			res.status(200).send(foundUser);
 		});
 });
+
+apiRoutes.get("/users/:id/outfits/", ensureAuthorization, function(req, res) {
+	User.findById(req.user)
+		.populate("outfits")
+		.exec(function(err, foundUser){
+			if (err) {
+				console.log("Error retrieving outfits from db,", error);
+				return res.status(500).send({message: "Error retrieving outfits"});
+			}
+			foundUser = outfitHelper(foundUser);
+			console.log("Found User with outfithelper", foundUser);
+
+			res.status(200).send(foundUser);
+		});
+	
+});
 // ================================
 // Outfits POST ================================
 // ================================
-apiRoutes.post("/users/outfits", ensureAuthorization, function (req, res) {
+apiRoutes.post("/users/:id/outfits", ensureAuthorization, function (req, res) {
 	// /api/v1/users/:id/outfits?pieces=1&tops=2
 	console.log("req.body post", req.body);
 	var outfit = new Outfit({
@@ -415,36 +374,97 @@ apiRoutes.post("/users/outfits", ensureAuthorization, function (req, res) {
 		type: req.body.type
 	});
 
-	outfit.save(function (err, savedOutfit) {
-		if (err) {
-			console.log("Error saving outfit to db:", err);
-			res.status(500).send({message: "Error saving outfit."})
-		}
-		console.log("Successful outfit saved", savedOutfit);
-		User.findById(req.user)
-			.exec(function (err, user) {
-				if (err) {
-					console.log("Error Message:", err.message);
-					return res.status(500).send({message: "Error finding user."});
-				}
-				user.outfits.unshift(savedOutfit._id);
-
-				user.save(function (err, savedUser) {
+	Outfit.findOne({imgUrl:outfit.imgUrl, type: outfit.type})
+		.exec(function (err, foundOutfit) {
+			if (err) {
+				console.log("Error Message: Outfit not found", err);
+			}
+			console.log("foundOutfit**", foundOutfit);
+			if (foundOutfit) {
+				foundOutfit.users.push(req.user);
+				foundOutfit.save(function (err, savedOutfit) {
 					if (err) {
-						console.log("Error Message:", err.message);
-						return res.status(500).send({message: "Error saving user."});
+						console.log("Error Message: Error Saving Outfit", err);
+						return res.status(500).send({message: "Error Saving Oufit."});
 					}
-					console.log("Successful outfit update");
-					res.status(201).send(savedOutfit);
-				});
-			});
+					User.findById(req.user)
+						.exec(function (err, foundUser) {
+							if (err) {
+								console.log("Error Message: Error Finding User", err);
+								return res.status(500).send({message: "Error Finding User."});
+							}
+							foundUser.outfits.push(savedOutfit._id);
 
-	});
+							foundUser.save(function (err, savedUser) {
+								if (err) {
+									console.log("Error Message: Error Saving User", err);
+									return res.status(500).send({message: "Error Saving User."});
+								}
+								//return the saved outfit
+								res.status(201).send(savedOutfit);
+							});
+						});
+				});
+			} else {
+				console.log("new outfit", outfit);
+				outfit.users.push(req.user);
+				outfit.save(function (err, savedOutfit) {
+					if (err) {
+						console.log("Error Message:", err);
+						return res.status(500).send({message: "Error saving outfit."});
+					}
+					console.log("The saved outfit", savedOutfit);
+					User.findById(req.user)
+						.exec(function (err, foundUser) {
+							if (err) {
+								console.log("Error Message: Error Finding User", err);
+								return res.status(500).send({message: "Error Finding User."});
+							}
+							foundUser.outfits.unshift(savedOutfit._id);
+
+							foundUser.save(function (err, savedUser) {
+								if (err) {
+									console.log("Error Message: Error Saving User", err);
+									return res.status(500).send({message: "Error Saving User."});
+								}
+								//return the saved outfit
+								res.status(201).send(savedOutfit);
+							});
+						});
+				});
+			}
+		});
+
+	// outfit.save(function (err, savedOutfit) {
+	// 	if (err) {
+	// 		console.log("Error saving outfit to db:", err);
+	// 		res.status(500).send({message: "Error saving outfit."})
+	// 	}
+	// 	console.log("Successful outfit saved", savedOutfit);
+	// 	User.findById(req.user)
+	// 		.exec(function (err, user) {
+	// 			if (err) {
+	// 				console.log("Error Message:", err.message);
+	// 				return res.status(500).send({message: "Error finding user."});
+	// 			}
+	// 			user.outfits.unshift(savedOutfit._id);
+	//
+	// 			user.save(function (err, savedUser) {
+	// 				if (err) {
+	// 					console.log("Error Message:", err.message);
+	// 					return res.status(500).send({message: "Error saving user."});
+	// 				}
+	// 				console.log("Successful outfit update");
+	// 				res.status(201).send(savedOutfit);
+	// 			});
+	// 		});
+	//
+	// });
 });
 // ================================
 // Outfit DELETE ================================
 // ================================
-apiRoutes.delete("/users/outfits/:outfitId", ensureAuthorization, function (req, res) {
+apiRoutes.delete("/users/:id/outfits/:outfitId", ensureAuthorization, function (req, res) {
 	// /api/v1/users/:id/outfits?pieces=1&tops=2
 	// console.log("req.body delete", req.params	);
 	var outfitId = req.params.outfitId;
@@ -455,38 +475,51 @@ apiRoutes.delete("/users/outfits/:outfitId", ensureAuthorization, function (req,
 				return res.status(500).send({message: "Error finding user."});
 			}
 			var index = foundUser.outfits.indexOf(outfitId);
-
 			if (index >= 0) {
 				foundUser.outfits.splice(index, 1);
 			} else {
-				console.log("Outfit was not in outfits to delete");
+				console.log("Error outfit not in user outfits");
 				return res.status(500).send({message: "Error outfit not in user outfits."});
 			}
-
 			foundUser.save(function (err, savedUser) {
 				if (err) {
 					console.log("Error Message:", err.message);
 					return res.status(500).send({message: "Error saving user."});
 				}
-				Outfit.findByIdAndRemove(outfitId)
-					.exec(function (err, foundOutfit) {
+				Outfit.findById(outfitId)
+					.exec(function(err, foundOutfit) {
 						if (err) {
-							console.log("Error Message:", err.message);
-							return res.status(500).send({message: "Error finding outfit."});
+							console.log("Error Message:", err);
+							return res.status(500).send({message: "Error finding outfit."})
 						}
-						console.log("Successful delete of outfit:", foundOutfit);
+						var index = foundOutfit.users.indexOf(savedUser._id);
 
-						// res.status(200).send(savedUser);
-						User.findById(savedUser._id)
-							.populate("outfits")
-							.exec(function (err, foundUser) {
+						if (index >= 0) {
+							foundOutfit.users.splice(index, 1);
+
+							if (foundOutfit.users.length === 0) {
+								console.log("Last user with outfit.");
+								Outfit.findOneAndRemove( foundOutfit._id)
+									.exec(function (err, deletedOutfit) {
+										if (err) {
+											console.log("Error Message: error deleting outfit from db",err);
+											return res.status(500).send({message: "Error deleting outfit from db."});
+										}
+											res.status(200).send(deletedOutfit);
+									});
+							}
+						} else {
+							console.log("Error user not in outfit users");
+							return res.status(500).send({message: "Error user not in user outfits."});
+
+							foundOutfit.save(function (err, savedOutfit) {
 								if (err) {
 									console.log("Error Message:", err.message);
-									return res.status(500).send({message: "Error finding user."});
+									return res.status(500).send({message: "Error saving outfit."});
 								}
-								res.status(200).send(savedUser);
-
+								res.status(200).send(savedOutfit);
 							});
+						}
 					});
 			});
 		});

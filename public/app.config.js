@@ -149,7 +149,7 @@
 		});
 
 		function allOutfits(MyOutfitsService) {
-			return MyOutfitsService.query("/api/v1/users/outfits/");
+			return MyOutfitsService.query();
 			// $http.get("/api/v1/users/outfits/")
 				// .then(allOutfitsSuccess)
 				// .catch(allOutfitsFail);
